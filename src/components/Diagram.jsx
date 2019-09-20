@@ -1,5 +1,6 @@
 import React from 'react';
-import diagramControl from './../diagram-control';
+import ReactKonva from 'react-konva';
+import Arri_M8 from './../assets/Arri M8.png';
 
 class Diagram extends React.Component {
   constructor(props) {
@@ -7,17 +8,22 @@ class Diagram extends React.Component {
     this.state = {};
   }
 
-  componentDidMount() {
-    // logic for canvas control has to fire after the canvas enters the DOM
-    diagramControl();
-  }
+  componentDidMount() {}
 
   render() {
     // need conditional logic in case browser doesn't support canvas
     // this can be a conditional that tests for the .getContext('2D') method
     // if (canvas.getContext)
+    let image = new Image();
+    image.src = Arri_M8;
 
-    return <canvas id="diagram"></canvas>;
+    return (
+      <ReactKonva.Stage height={300} width={300}>
+        <ReactKonva.Layer>
+          <ReactKonva.Image image={image} draggable={true} />
+        </ReactKonva.Layer>
+      </ReactKonva.Stage>
+    );
   }
 }
 

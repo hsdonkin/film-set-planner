@@ -66,9 +66,11 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.6.0",
+    "konva": "^4.0.12",
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
+    "react-konva": "^16.9.0-1",
     "react-router-dom": "^4.3.1",
     "whatwg-fetch": "^3.0.0"
   }
