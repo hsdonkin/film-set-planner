@@ -13,12 +13,15 @@ export default function diagramControl() {
   const canvas = document.getElementById('diagram');
   const DOMURL = window.URL || window.webkitURL || window;
 
-  canvas.setAttribute('height', 150);
-  canvas.setAttribute('width', 150);
+  canvas.setAttribute('height', 500);
+  canvas.setAttribute('width', 500);
   const ctx = canvas.getContext('2d');
+  // create a new image
   const Arri_M8_IMG = new Image();
+  // set the src to the required asset path
   Arri_M8_IMG.src = Arri_M8_URL;
+  // when the image asset is loaded, execute the draw function
   Arri_M8_IMG.onload = function() {
-    ctx.drawImage(Arri_M8_IMG, 0, 0);
+    ctx.drawImage(Arri_M8_IMG, 0, 0, 50, 50);
   };
 }
