@@ -1,5 +1,4 @@
 import React from 'react';
-import { BrowserRouter, Link } from 'react-router-dom';
 
 // redux
 import { connect } from 'react-redux';
@@ -19,30 +18,6 @@ const App = props => {
     <div className="page-wrap">
       <Navbar />
       <Sidebar />
-      <button
-        onClick={() => {
-          props.addObjectToDiagram(props.objects['arri_alexa_mini']);
-        }}
-      >
-        Add
-      </button>
-      <button
-        onClick={() => {
-          let keys = Object.keys(props.diagram.objects);
-          props.removeObjectFromDiagram(keys[0]);
-        }}
-      >
-        Delete
-      </button>
-
-      <button
-        onClick={() => {
-          let keys = Object.keys(props.diagram.objects);
-          props.toggleObjectSelected(keys[0]);
-        }}
-      >
-        Toggle Selected
-      </button>
       <Diagram />
     </div>
   );
