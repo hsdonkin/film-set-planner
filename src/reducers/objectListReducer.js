@@ -1,19 +1,25 @@
+const ArriAlexaMini = require('./../assets/Arri Alexa Mini.png');
+
 const initialState = {
   arri_m8: {
     name: 'Arri M8',
-    imgPath: './../assets/Arri M8.png'
+    imgPath: './../assets/Arri M8.png',
+    imgName: 'ArriM8'
   },
   joker_800: {
     name: 'Joker 800',
-    imgPath: './../assets/Joker 800.png'
+    imgPath: './../assets/Joker 800.png',
+    imgName: 'Joker800'
   },
   arri_alexa_mini: {
     name: 'Arri Alexa Mini',
-    imgPath: './../assets/Arri Alexa Mini.png'
+    imgPath: './../assets/Arri Alexa Mini.png',
+    imgName: 'ArriAlexaMini'
   },
   red_weapon: {
     name: 'Red Weapon',
-    imgPath: './../assets/Red Weapon.png'
+    imgPath: './../assets/Red Weapon.png',
+    imgName: 'RedWeapon'
   }
 };
 

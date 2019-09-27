@@ -1,11 +1,14 @@
 import { v4 } from 'uuid';
 
+const ArriAlexaMini = require('./../assets/Arri Alexa Mini.png');
+
 const initialState = {
   objects: {
     [v4()]: {
       name: 'Arri M8',
       selected: false,
       imgPath: './../assets/Arri M8.png',
+      imgName: 'ArriM8',
       x: 0,
       y: 0
     },
@@ -13,6 +16,7 @@ const initialState = {
       name: 'Arri M8',
       selected: true,
       imgPath: './../assets/Arri M8.png',
+      imgName: 'ArriM8',
       x: 50,
       y: 50
     }
@@ -30,6 +34,7 @@ const objectDiagramReducer = (state = initialState, action) => {
       newState.objects[v4()] = {
         name: action.object.name,
         imgPath: action.object.imgPath,
+        imgName: action.object.imgName,
         selected: false,
         x: 0,
         y: 0

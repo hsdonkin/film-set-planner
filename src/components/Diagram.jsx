@@ -8,6 +8,9 @@ import { Stage, Layer, Image, Transformer } from 'react-konva';
 import useImage from 'use-image';
 import { ArriAlexaMiniImage } from './images';
 
+// dynamic image layer
+import ObjectImage from './ObjectImage';
+
 class Diagram extends React.Component {
   constructor(props) {
     super(props);
@@ -20,19 +23,17 @@ class Diagram extends React.Component {
     let layers = [];
     keys.forEach(key => {
       layers.push(
-        <Layer key={v4()}>
-          <ArriAlexaMiniImage />
+        <Layer key={v4()} draggable>
+          <ObjectImage imgName={objects[key].imgName} />
         </Layer>
       );
     });
-
-    console.log(layers);
 
     return (
       <Stage
         style={{ border: '1px whitesmoke solid' }}
         width={window.innerWidth}
-        height={window.innerHeight}
+        height={window.innerHeight * 0.75}
         onMouseDown={e => {
           // deselect when clicked on empty area
           const clickedOnEmpty = e.target === e.target.getStage();
