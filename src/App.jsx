@@ -4,7 +4,7 @@ import { BrowserRouter, Link } from 'react-router-dom';
 // redux
 import { connect } from 'react-redux';
 import Diagram from './components/Diagram';
-import { addObjectToDiagram } from './actions';
+import { addObjectToDiagram, removeObjectFromDiagram } from './actions';
 
 const App = props => {
   console.log(props);
@@ -18,6 +18,15 @@ const App = props => {
         }}
       >
         Add
+      </button>
+      <button
+        onClick={() => {
+          let keys = Object.keys(props.diagram.objects);
+          console.log(keys);
+          props.removeObjectFromDiagram(keys[0]);
+        }}
+      >
+        Delete
       </button>
       <Diagram />
     </div>
@@ -33,5 +42,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { addObjectToDiagram }
+  { addObjectToDiagram, removeObjectFromDiagram }
 )(App);

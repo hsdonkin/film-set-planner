@@ -20,9 +20,10 @@ const initialState = {
 };
 
 const objectDiagramReducer = (state = initialState, action) => {
+  let newState;
   switch (action.type) {
     case 'ADD_TO_DIAGRAM':
-      let newState = Object.assign({}, state);
+      newState = Object.assign({}, state);
       newState.objects[v4()] = {
         name: action.object.name,
         imgPath: action.object.imgPath,
@@ -32,7 +33,9 @@ const objectDiagramReducer = (state = initialState, action) => {
       };
       return newState;
     case 'REMOVE_FROM_DIAGRAM':
-      return state;
+      newState = Object.assign({}, state);
+      delete newState.objects[action.objectID];
+      return newState;
     case 'TOGGLE_OBJECT_SELECTED':
       return state;
     case 'UPDATE_XY_POSITION':

@@ -5,10 +5,10 @@ export const addObjectToDiagram = object => {
   };
 };
 
-export const removeObjectFromDiagram = object => {
+export const removeObjectFromDiagram = objectID => {
   return {
     type: 'REMOVE_FROM_DIAGRAM',
-    object: object
+    objectID: objectID
   };
 };
 
