@@ -7,8 +7,6 @@ import Diagram from './components/Diagram';
 import { addObjectToDiagram, removeObjectFromDiagram } from './actions';
 
 const App = props => {
-  console.log(props);
-
   return (
     <div>
       <h1>App is working</h1>
@@ -22,7 +20,6 @@ const App = props => {
       <button
         onClick={() => {
           let keys = Object.keys(props.diagram.objects);
-          console.log(keys);
           props.removeObjectFromDiagram(keys[0]);
         }}
       >

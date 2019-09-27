@@ -23,7 +23,10 @@ const objectDiagramReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
     case 'ADD_TO_DIAGRAM':
-      newState = Object.assign({}, state);
+      // using JSON parse here to avoid mutating state
+      newState = JSON.parse(JSON.stringify(state));
+      console.log('NewState:', newState);
+      console.log('Old State:', state);
       newState.objects[v4()] = {
         name: action.object.name,
         imgPath: action.object.imgPath,
@@ -33,7 +36,8 @@ const objectDiagramReducer = (state = initialState, action) => {
       };
       return newState;
     case 'REMOVE_FROM_DIAGRAM':
-      newState = Object.assign({}, state);
+      // using JSON parse here to avoid mutating state
+      newState = JSON.parse(JSON.stringify(state));
       delete newState.objects[action.objectID];
       return newState;
     case 'TOGGLE_OBJECT_SELECTED':
