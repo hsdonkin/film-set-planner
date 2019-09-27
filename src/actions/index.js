@@ -1,27 +1,27 @@
-export const addItemToDiagram = item => {
+export const addObjectToDiagram = object => {
   return {
     type: 'ADD_TO_DIAGRAM',
-    item: item
+    object: object
   };
 };
 
-export const removeItemFromDiagram = item => {
+export const removeObjectFromDiagram = object => {
   return {
     type: 'REMOVE_FROM_DIAGRAM',
-    item: item
+    object: object
   };
 };
 
-export const toggleItemSelected = item => {
+export const toggleObjectSelected = object => {
   return {
     type: 'TOGGLE_ITEM_SELECTED',
-    item: item
+    object: object
   };
 };
 
-export const updateXYPosition = item => {
+export const updateXYPosition = object => {
   return {
     type: 'UPDATE_XY_POSITION',
-    item: item
+    object: object
   };
 };
