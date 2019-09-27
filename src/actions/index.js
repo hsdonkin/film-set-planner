@@ -19,9 +19,11 @@ export const toggleObjectSelected = objectID => {
   };
 };
 
-export const updateXYPosition = object => {
+export const updateXYPosition = (objectID, xValue, yValue) => {
   return {
     type: 'UPDATE_XY_POSITION',
-    object: object
+    objectID: objectID,
+    x: xValue,
+    y: yValue
   };
 };

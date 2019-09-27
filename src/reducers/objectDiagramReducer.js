@@ -49,7 +49,11 @@ const objectDiagramReducer = (state = initialState, action) => {
       ].selected;
       return newState;
     case 'UPDATE_XY_POSITION':
-      return state;
+      // using JSON parse here to avoid mutating state
+      newState = JSON.parse(JSON.stringify(state));
+      newState.objects[action.objectID].x = action.x;
+      newState.objects[action.objectID].y = action.y;
+      return newState;
     default:
       return state;
   }
