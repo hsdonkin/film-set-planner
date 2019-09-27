@@ -1,12 +1,36 @@
 import React from 'react';
-import { BrowserRouter, Link } from 'react-router-dom';
+
+// redux
+import { connect } from 'react-redux';
+import {
+  addObjectToDiagram,
+  removeObjectFromDiagram,
+  toggleObjectSelected
+} from './actions';
+
+// components
 import Diagram from './components/Diagram';
+import Navbar from './components/Navbar';
+import Sidebar from './components/Sidebar';
 
-const App = () => (
-  <div>
-    <h1>App is working</h1>
-    <Diagram />
-  </div>
-);
+const App = props => {
+  return (
+    <div className="page-wrap">
+      <Navbar />
+      <Sidebar />
+      <Diagram />
+    </div>
+  );
+};
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    diagram: state.diagram,
+    objects: state.objects
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { addObjectToDiagram, removeObjectFromDiagram, toggleObjectSelected }
+)(App);
