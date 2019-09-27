@@ -6,12 +6,7 @@ import { v4 } from 'uuid';
 // konva
 import { Stage, Layer, Image, Transformer } from 'react-konva';
 import useImage from 'use-image';
-const ArriAlexaMini = require('./../assets/Arri Alexa Mini.png');
-
-const ArriAlexaMiniImage = () => {
-  const [image] = useImage(ArriAlexaMini);
-  return <Image image={image} />;
-};
+import { ArriAlexaMiniImage } from './images';
 
 class Diagram extends React.Component {
   constructor(props) {

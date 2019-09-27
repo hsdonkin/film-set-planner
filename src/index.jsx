@@ -21,8 +21,6 @@ const store = createStore(rootReducer, applyMiddleware(logger));
 
 import App from './App';
 
-import './diagram-control';
-
 import './style.scss';
 
 const root = document.getElementById('root');
