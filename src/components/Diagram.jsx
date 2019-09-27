@@ -1,8 +1,5 @@
 import React from 'react';
 import { Stage, Layer, Image, Transformer } from 'react-konva';
-import useImage from 'use-image';
-import { v4 } from 'uuid';
-import populateDiagram from '../diagram-control';
 
 class Diagram extends React.Component {
   constructor(props) {
@@ -10,12 +7,6 @@ class Diagram extends React.Component {
   }
 
   render() {
-    // const layers = this.state.objects.map(object => {
-    //   let image = new Image();
-    //   image.src = './../assets/Arri M8.png';
-    //   return <Layer>{/* <Image image={image} /> */}</Layer>;
-    // });
-
     return (
       <Stage
         style={{ border: '1px whitesmoke solid' }}
@@ -28,9 +19,7 @@ class Diagram extends React.Component {
             selectShape(null);
           }
         }}
-      >
-        {/* {layers} */}
-      </Stage>
+      ></Stage>
     );
   }
 }

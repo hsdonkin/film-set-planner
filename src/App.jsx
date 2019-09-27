@@ -3,17 +3,22 @@ import { BrowserRouter, Link } from 'react-router-dom';
 
 // redux
 import { connect } from 'react-redux';
-import Diagram from './components/Diagram';
 import {
   addObjectToDiagram,
   removeObjectFromDiagram,
   toggleObjectSelected
 } from './actions';
 
+// components
+import Diagram from './components/Diagram';
+import Navbar from './components/Navbar';
+import Sidebar from './components/Sidebar';
+
 const App = props => {
   return (
-    <div>
-      <h1>App is working</h1>
+    <div className="page-wrap">
+      <Navbar />
+      <Sidebar />
       <button
         onClick={() => {
           props.addObjectToDiagram(props.objects['arri_alexa_mini']);
