@@ -4,7 +4,11 @@ import { BrowserRouter, Link } from 'react-router-dom';
 // redux
 import { connect } from 'react-redux';
 import Diagram from './components/Diagram';
-import { addObjectToDiagram, removeObjectFromDiagram } from './actions';
+import {
+  addObjectToDiagram,
+  removeObjectFromDiagram,
+  toggleObjectSelected
+} from './actions';
 
 const App = props => {
   return (
@@ -25,6 +29,15 @@ const App = props => {
       >
         Delete
       </button>
+
+      <button
+        onClick={() => {
+          let keys = Object.keys(props.diagram.objects);
+          props.toggleObjectSelected(keys[0]);
+        }}
+      >
+        Toggle Selected
+      </button>
       <Diagram />
     </div>
   );
@@ -39,5 +52,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { addObjectToDiagram, removeObjectFromDiagram }
+  { addObjectToDiagram, removeObjectFromDiagram, toggleObjectSelected }
 )(App);

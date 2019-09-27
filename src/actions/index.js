@@ -12,10 +12,10 @@ export const removeObjectFromDiagram = objectID => {
   };
 };
 
-export const toggleObjectSelected = object => {
+export const toggleObjectSelected = objectID => {
   return {
-    type: 'TOGGLE_ITEM_SELECTED',
-    object: object
+    type: 'TOGGLE_OBJECT_SELECTED',
+    objectID: objectID
   };
 };
 

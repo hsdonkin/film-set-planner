@@ -41,7 +41,13 @@ const objectDiagramReducer = (state = initialState, action) => {
       delete newState.objects[action.objectID];
       return newState;
     case 'TOGGLE_OBJECT_SELECTED':
-      return state;
+      // using JSON parse here to avoid mutating state
+      newState = JSON.parse(JSON.stringify(state));
+      // make the true / false value of selected the opposite of previous value
+      newState.objects[action.objectID].selected = !newState.objects[
+        action.objectID
+      ].selected;
+      return newState;
     case 'UPDATE_XY_POSITION':
       return state;
     default:
