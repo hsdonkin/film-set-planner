@@ -12,7 +12,7 @@ const ArriM8 = require('./../assets/Arri M8.png');
 const ObjectImage = props => {
   // eval so that we can dynamically select images
   const [image] = useImage(eval(props.imgName));
-  return <Image image={image} />;
+  return <Image x={props.x} y={props.y} image={image} />;
 };
 
 export default ObjectImage;

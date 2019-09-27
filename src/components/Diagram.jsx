@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 // v4
 import { v4 } from 'uuid';
 // konva
-import { Stage, Layer, Image, Transformer } from 'react-konva';
+import { Stage, Layer, Group, Transformer } from 'react-konva';
 import useImage from 'use-image';
 import { ArriAlexaMiniImage } from './images';
 
@@ -24,7 +24,11 @@ class Diagram extends React.Component {
     keys.forEach(key => {
       layers.push(
         <Layer key={v4()} draggable>
-          <ObjectImage imgName={objects[key].imgName} />
+          <ObjectImage
+            imgName={objects[key].imgName}
+            x={objects[key].x}
+            y={objects[key].y}
+          />
         </Layer>
       );
     });
