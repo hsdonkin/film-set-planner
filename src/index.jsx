@@ -11,6 +11,13 @@ import ReactDOM from 'react-dom';
 // hot reload for development
 import { AppContainer } from 'react-hot-loader';
 
+// react redux
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import rootReducer from './reducers';
+
+const store = createStore(rootReducer);
+
 import App from './App';
 
 import './diagram-control';
@@ -22,7 +29,9 @@ const root = document.getElementById('root');
 const render = Component => {
   ReactDOM.render(
     <AppContainer>
-      <Component />
+      <Provider store={store}>
+        <Component />
+      </Provider>
     </AppContainer>,
     root
   );
