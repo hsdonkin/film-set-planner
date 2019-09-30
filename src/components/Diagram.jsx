@@ -15,11 +15,12 @@ import ObjectImage from './ObjectImage';
 class Diagram extends React.Component {
   constructor(props) {
     super(props);
-
+    this.refs = []
     this.state = {
-      objects: this.props.objects
+      objects: this.props.objects,
     }
   }
+
 
   shouldComponentUpdate = (nextProps, nextState) => {
     // need to check how many properties diagram.objects has
@@ -34,16 +35,18 @@ class Diagram extends React.Component {
 
   render() {
     const {deselectAllObjects} = this.props
-
+    const refs = []
     // extract objects from the redux store diagram
     const { objects } = this.props.diagram;
     let keys = Object.keys(objects);
-    let layers = [];
+    let objectImagesList = [];
     keys.forEach(key => {
-      layers.push(
-        <Layer key={v4()} draggable>
+      refs.push(React.createRef(key))
+      objectImagesList.push(
+      
           <ObjectImage
             ref={key}
+            key={key}
             imgName={objects[key].imgName}
             objectID = {key}
             x={objects[key].x}
@@ -51,8 +54,8 @@ class Diagram extends React.Component {
             rotation={objects[key].rotation}
             selected={objects[key.selected]}
           />
-          {objects[key].selected && console.log(objects[key],"*selected") }
-        </Layer>
+          
+       
       );
     });
 
@@ -74,7 +77,9 @@ class Diagram extends React.Component {
           }
         }}
       >
-        {layers}
+        <Layer key={v4()} draggable>
+        {objectImagesList}
+        </Layer>
       </Stage>
     );
   }

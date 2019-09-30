@@ -3,7 +3,7 @@ import { Image as KonvaImage, Transformer } from 'react-konva';
 
 // redux
 import {connect} from 'react-redux'
-import {updateXYPosition, toggleObjectSelected, deselectAllObjects, updateRotation} from './../actions'
+import {updateXYPosition, toggleObjectSelected, deselectAllObjects, updateRotation, removeObjectFromDiagram} from './../actions'
 
 // all these requires have to be done here
 // ha ha ha is this legal who knows
@@ -39,7 +39,7 @@ class ObjectImage extends React.Component {
     
   
 
-    const {updateXYPosition, toggleObjectSelected, deselectAllObjects, updateRotation} = this.props
+    const {updateXYPosition, toggleObjectSelected, deselectAllObjects, updateRotation, removeObjectFromDiagram} = this.props
     let xPos = this.props.x
     let yPos = this.props.y
     let rotation = this.props.rotation
@@ -74,6 +74,7 @@ class ObjectImage extends React.Component {
           }
           onClick ={
             () => {
+              console.log("clicked")
               deselectAllObjects();
               this.setState({selected:!this.state.selected})
               if(keys[16] === true){
@@ -82,11 +83,30 @@ class ObjectImage extends React.Component {
                }
             }
           }
+
+          onContextMenu={
+            () => {
+              removeObjectFromDiagram(this.props.objectID)
+              window.oncontextmenu = () => {
+                return false
+              }
+            }
+          }
+
           onTransformEnd = {
             (event) => {
+              const stage = event.currentTarget.parent.parent.attrs
+              console.log(stage)
+              console.log(event.currentTarget)
               const newXPos = event.currentTarget.attrs.x
               const newYPos = event.currentTarget.attrs.y
               const newRotation = event.currentTarget.attrs.rotation
+              if (event.currentTarget.attrs.x <= 0){
+                newXPos = 0;
+              }
+              if (event.currentTarget.attrs.x <= 0){
+                newYPos = 0;
+              }
               updateXYPosition(this.props.objectID, newXPos, newYPos);
               updateRotation(this.props.objectID, newRotation);
             }
@@ -104,4 +124,4 @@ const mapStateToProps = (state) => {
   return ({objects: state.diagram.objects })
 }
 
-export default connect(mapStateToProps, {updateXYPosition, toggleObjectSelected, deselectAllObjects, updateRotation})(ObjectImage);
+export default connect(mapStateToProps, {updateXYPosition, toggleObjectSelected, deselectAllObjects, updateRotation, removeObjectFromDiagram})(ObjectImage);
