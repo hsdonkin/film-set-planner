@@ -53,6 +53,7 @@ class Diagram extends React.Component {
             y={objects[key].y}
             rotation={objects[key].rotation}
             selected={objects[key.selected]}
+            stageDimensions={{width:window.innerWidth,height:window.innerHeight}}
           />
           
        

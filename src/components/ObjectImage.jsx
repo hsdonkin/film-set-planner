@@ -61,6 +61,41 @@ class ObjectImage extends React.Component {
         <React.Fragment>
   
           <KonvaImage ref={this.KonvaImageRef} x={xPos} y={yPos} rotation={rotation} shadowColor={"gray"} shadowOffset={{x:0,y:0}} shadowBlur={50} shadowOpacity={0.3} image={loadedImage} draggable={"true"} 
+          dragBoundFunc={
+            (position) => {
+              const canvas = document.getElementsByClassName("konvajs-content")[0]
+              let {height, width} = canvas.style
+              height = parseInt(height)
+              width = parseInt(width)
+              console.log(height)
+              console.log(width)
+              console.log(position.x,position.y)
+             
+              // handle left and upper bounds
+              if (position.x <= 10){
+                position.x = 10
+              }
+              if (position.y <= 10){
+                position.y = 10
+              }
+
+              // lower and outer bounds
+              if (position.x >= width-120){
+                position.x = width-120
+              }
+
+              if (position.y >= height-120){
+                position.y = height-120
+              }
+          
+                return {
+                  x: position.x,
+                  y: position.y
+                }
+              
+            }
+          }
+
           onDragEnd={ 
             (event) => {
               // update the X Y position by sending an action to redux store
@@ -72,6 +107,7 @@ class ObjectImage extends React.Component {
               updateRotation(this.props.objectID, newRotation);
             }
           }
+
           onClick ={
             () => {
               console.log("clicked")
@@ -88,7 +124,7 @@ class ObjectImage extends React.Component {
             () => {
               removeObjectFromDiagram(this.props.objectID);
               // prevent the context menu from opening
-              window.oncontextmenu = (e) => {
+              window.oncontextmenu = () => {
                 setTimeout(function(){
                   window.oncontextmenu = () => {
                     return true
