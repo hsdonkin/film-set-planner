@@ -25,6 +25,7 @@ const initialState = {
   }
 };
 
+let objectOffset = 0;
 const objectDiagramReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
@@ -38,10 +39,14 @@ const objectDiagramReducer = (state = initialState, action) => {
         imgPath: action.object.imgPath,
         imgName: action.object.imgName,
         selected: false,
-        x: 0,
-        y: 0,
+        x: 100 + objectOffset,
+        y: 100 + objectOffset,
         rotation:0
       };
+      objectOffset += 50;
+      setTimeout (function(){
+        objectOffset = 0;
+      }, 2000)
       return newState;
     case 'REMOVE_FROM_DIAGRAM':
       // using JSON parse here to avoid mutating state
