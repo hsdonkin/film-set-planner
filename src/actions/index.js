@@ -27,3 +27,11 @@ export const updateXYPosition = (objectID, xValue, yValue) => {
     y: yValue
   };
 };
+
+export const updateRotation = (objectID, rotation) => {
+  return {
+    type: 'UPDATE_ROTATION',
+    objectID,
+    rotation
+  }
+}

@@ -9,16 +9,18 @@ const initialState = {
       selected: false,
       imgPath: './../assets/Arri M8.png',
       imgName: 'ArriM8',
-      x: 0,
-      y: 0
+      x: 100,
+      y: 100,
+      rotation:0
     },
     [v4()]: {
       name: 'Arri M8',
       selected: true,
       imgPath: './../assets/Arri M8.png',
       imgName: 'ArriM8',
-      x: 50,
-      y: 50
+      x: 400,
+      y: 400,
+      rotation:0
     }
   }
 };
@@ -59,6 +61,12 @@ const objectDiagramReducer = (state = initialState, action) => {
       newState.objects[action.objectID].x = action.x;
       newState.objects[action.objectID].y = action.y;
       return newState;
+
+      case 'UPDATE_ROTATION':
+        // using JSON parse here to avoid mutating state
+        newState = JSON.parse(JSON.stringify(state)); 
+        newState.objects[action.objectID].rotation = action.rotation;
+        return newState
     default:
       return state;
   }
