@@ -40,12 +40,14 @@ class Diagram extends React.Component {
       layers.push(
         <Layer key={v4()} draggable>
           <ObjectImage
+            ref={key}
             imgName={objects[key].imgName}
             objectID = {key}
             x={objects[key].x}
             y={objects[key].y}
             rotation={objects[key].rotation}
           />
+          
         </Layer>
       );
     });
