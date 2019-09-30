@@ -35,3 +35,7 @@ export const updateRotation = (objectID, rotation) => {
     rotation
   }
 }
+
+export const deselectAllObjects = () => {
+  return {type:'DESELECT_ALL_OBJECTS'}
+}

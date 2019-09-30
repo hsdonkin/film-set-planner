@@ -2,6 +2,7 @@ import { v4 } from 'uuid';
 
 
 const initialState = {
+  selection: true,
   objects: {
     [v4()]: {
       name: 'Arri M8',
@@ -54,7 +55,23 @@ const objectDiagramReducer = (state = initialState, action) => {
       newState.objects[action.objectID].selected = !newState.objects[
         action.objectID
       ].selected;
+      if (newState.objects[action.objectID].selected === true){
+        newState.selection = true
+
+      } else {
+        newState.selection = false
+      }
       return newState;
+      case 'DESELECT_ALL_OBJECTS':
+      newState = JSON.parse(JSON.stringify(state));
+      const keys = Object.keys(newState.objects)
+      
+      keys.forEach((key) => {
+        newState.objects[key].selected = false
+      })
+      newState.selection = false
+      return newState
+      
     case 'UPDATE_XY_POSITION':
       // using JSON parse here to avoid mutating state
       newState = JSON.parse(JSON.stringify(state));
