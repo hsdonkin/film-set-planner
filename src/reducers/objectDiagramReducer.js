@@ -1,6 +1,5 @@
 import { v4 } from 'uuid';
 
-const ArriAlexaMini = require('./../assets/Arri Alexa Mini.png');
 
 const initialState = {
   objects: {
@@ -20,7 +19,7 @@ const initialState = {
       imgName: 'ArriM8',
       x: 400,
       y: 400,
-      rotation:0
+      rotation:50
     }
   }
 };
@@ -39,7 +38,8 @@ const objectDiagramReducer = (state = initialState, action) => {
         imgName: action.object.imgName,
         selected: false,
         x: 0,
-        y: 0
+        y: 0,
+        rotation:0
       };
       return newState;
     case 'REMOVE_FROM_DIAGRAM':

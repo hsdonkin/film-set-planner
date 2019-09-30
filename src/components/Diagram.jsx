@@ -44,6 +44,7 @@ class Diagram extends React.Component {
             objectID = {key}
             x={objects[key].x}
             y={objects[key].y}
+            rotation={objects[key].rotation}
           />
         </Layer>
       );

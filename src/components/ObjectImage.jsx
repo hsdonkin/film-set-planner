@@ -14,17 +14,18 @@ const Joker800 = require('./../assets/Joker 800.png');
 const ArriM8 = require('./../assets/Arri M8.png');
 
 
+
 const ObjectImage = props => {
   // eval so that we can dynamically select images
   const [image] = useImage(eval(props.imgName));
   const {updateXYPosition} = props
   let xPos = props.x
   let yPos = props.y
-  
+  let rotation = props.rotation
   return (
 
      
-      <Image x={xPos} y={yPos} image={image} draggable={"true"} 
+      <Image x={xPos} y={yPos} rotation={rotation} image={image} draggable={"true"} 
       onDragEnd={ 
         (event) => {
           // update the X Y position by sending an action to redux store
