@@ -78,16 +78,22 @@ class ObjectImage extends React.Component {
               deselectAllObjects();
               this.setState({selected:!this.state.selected})
               if(keys[16] === true){
-               
+                
                 console.log(rotationAngles)
-               }
+              }
             }
           }
-
+          
           onContextMenu={
             () => {
-              removeObjectFromDiagram(this.props.objectID)
-              window.oncontextmenu = () => {
+              removeObjectFromDiagram(this.props.objectID);
+              // prevent the context menu from opening
+              window.oncontextmenu = (e) => {
+                setTimeout(function(){
+                  window.oncontextmenu = () => {
+                    return true
+                  }
+                }, 100)
                 return false
               }
             }

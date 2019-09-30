@@ -76,6 +76,18 @@ class Diagram extends React.Component {
             this.forceUpdate();
           }
         }}
+        onContextMenu = {
+          () => {
+            window.oncontextmenu = (e) => {
+              setTimeout(function(){
+                window.oncontextmenu = () => {
+                  return true
+                }
+              }, 100)
+              return false
+            }
+          }
+        }
       >
         <Layer key={v4()} draggable>
         {objectImagesList}
