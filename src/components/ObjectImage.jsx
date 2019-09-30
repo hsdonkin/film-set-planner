@@ -28,6 +28,15 @@ class ObjectImage extends React.Component {
 
   }
   render () {
+
+    // track key presses for transform
+    const keys = {};
+    window.onkeyup =  (e) => { keys[e.keyCode] = false; console.log(keys); this.forceUpdate(); }
+    window.onkeydown = (e) => { keys[e.keyCode] = true; console.log(keys); this.forceUpdate(); }
+
+    let rotationAngles;
+   
+    
   
 
     const {updateXYPosition, toggleObjectSelected, deselectAllObjects, updateRotation} = this.props
@@ -66,7 +75,10 @@ class ObjectImage extends React.Component {
           onClick ={
             () => {
               this.setState({selected:!this.state.selected})
-              
+              if(keys[16] === true){
+               
+                console.log(rotationAngles)
+               }
             }
           }
           onTransformEnd = {
@@ -79,7 +91,7 @@ class ObjectImage extends React.Component {
             }
           }
           />
-          <Transformer ref={this.trRef}/> 
+          <Transformer ref={this.trRef} rotationSnaps={[0,45,90,135,180,225,270, 315, 360]}  resizeEnabled={false}/> 
        
         </React.Fragment>
   
