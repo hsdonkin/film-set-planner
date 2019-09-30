@@ -60,7 +60,7 @@ class ObjectImage extends React.Component {
   
         <React.Fragment>
   
-          <KonvaImage ref={this.KonvaImageRef} x={xPos} y={yPos} rotation={rotation} image={loadedImage} draggable={"true"} 
+          <KonvaImage ref={this.KonvaImageRef} x={xPos} y={yPos} rotation={rotation} shadowColor={"gray"} shadowOffset={{x:0,y:0}} shadowBlur={50} shadowOpacity={0.3} image={loadedImage} draggable={"true"} 
           onDragEnd={ 
             (event) => {
               // update the X Y position by sending an action to redux store
@@ -74,6 +74,7 @@ class ObjectImage extends React.Component {
           }
           onClick ={
             () => {
+              deselectAllObjects();
               this.setState({selected:!this.state.selected})
               if(keys[16] === true){
                
@@ -91,7 +92,7 @@ class ObjectImage extends React.Component {
             }
           }
           />
-          <Transformer ref={this.trRef} rotationSnaps={[0,45,90,135,180,225,270, 315, 360]}  resizeEnabled={false}/> 
+          <Transformer ref={this.trRef} rotationSnaps={[0,45,90,135,180,225,270, 315, 360]}  resizeEnabled={false} borderDash={[15,15]} padding={10}/> 
        
         </React.Fragment>
   
