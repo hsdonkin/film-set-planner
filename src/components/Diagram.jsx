@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 import { v4 } from 'uuid';
 // konva
 import { Stage, Layer, Group, Transformer } from 'react-konva';
-import useImage from 'use-image';
-import { ArriAlexaMiniImage } from './images';
+
+
 
 // dynamic image layer
 import ObjectImage from './ObjectImage';
@@ -14,6 +14,21 @@ import ObjectImage from './ObjectImage';
 class Diagram extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      objects: this.props.objects
+    }
+  }
+
+  shouldComponentUpdate = (nextProps, nextState) => {
+    // need to check how many properties diagram.objects has
+    // this tells us if a new thing was added to the diagram, if not don't update it
+    // disabling this creates performance issues where the diagram flickers
+    if (Object.keys(nextProps.diagram.objects).length === Object.keys(this.props.diagram.objects).length ){
+      return false
+    }else{
+      return true
+    }
   }
 
   render() {
@@ -26,6 +41,7 @@ class Diagram extends React.Component {
         <Layer key={v4()} draggable>
           <ObjectImage
             imgName={objects[key].imgName}
+            objectID = {key}
             x={objects[key].x}
             y={objects[key].y}
           />
@@ -35,6 +51,9 @@ class Diagram extends React.Component {
 
     return (
       <Stage
+      
+        scaleX={0.5}
+        scaleY={0.5}
         style={{ border: '1px whitesmoke solid' }}
         width={window.innerWidth}
         height={window.innerHeight * 0.75}
