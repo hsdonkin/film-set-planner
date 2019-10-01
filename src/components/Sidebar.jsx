@@ -1,9 +1,10 @@
-import React from 'react';
-import { v4 } from 'uuid';
-import { connect } from 'react-redux';
-import { addObjectToDiagram } from './../actions';
+import React from "react";
+import { v4 } from "uuid";
+import { connect } from "react-redux";
+import { addObjectToDiagram, removeAllFromDiagram } from "./../actions";
 
 const Sidebar = props => {
+  const { removeAllFromDiagram } = props;
   let objectsList = [];
   let keys = Object.keys(props.objects);
   keys.forEach(key => {
@@ -16,7 +17,18 @@ const Sidebar = props => {
       </button>
     );
   });
-  return <div className="sidebar">{buttonList}</div>;
+  return (
+    <div className="sidebar">
+      <button
+        onClick={() => {
+          removeAllFromDiagram();
+        }}
+      >
+        Delete All
+      </button>
+      {buttonList}
+    </div>
+  );
 };
 
 const mapStateToProps = state => {
@@ -27,5 +39,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { addObjectToDiagram }
+  { addObjectToDiagram, removeAllFromDiagram }
 )(Sidebar);
