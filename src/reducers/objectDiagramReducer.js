@@ -2,6 +2,11 @@ import { v4 } from "uuid";
 
 const initialState = {
   selection: true,
+  stage: {
+    x: 0,
+    y: 0,
+    scale: 0.2
+  },
   objects: {
     [v4()]: {
       name: "Arri M8",
@@ -88,6 +93,13 @@ const objectDiagramReducer = (state = initialState, action) => {
       newState.objects[action.objectID].y = action.y;
       return newState;
 
+    case "UPDATE_STAGE_XY_POSITION":
+      newState = JSON.parse(JSON.stringify(state));
+      newState.stage = {
+        x: action.x,
+        y: action.y
+      };
+      return newState;
     case "UPDATE_ROTATION":
       // using JSON parse here to avoid mutating state
       newState = JSON.parse(JSON.stringify(state));

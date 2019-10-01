@@ -524,14 +524,14 @@ class ObjectImage extends React.Component {
           onContextMenu={() => {
             removeObjectFromDiagram(this.props.objectID);
             // prevent the context menu from opening
-            // window.oncontextmenu = () => {
-            //   setTimeout(function() {
-            //     window.oncontextmenu = () => {
-            //       return true;
-            //     };
-            //   }, 100);
-            //   return false;
-            // };
+            window.oncontextmenu = () => {
+              setTimeout(function() {
+                window.oncontextmenu = () => {
+                  return true;
+                };
+              }, 100);
+              return false;
+            };
           }}
           onTransformEnd={event => {
             const stage = event.currentTarget.parent.parent.attrs;

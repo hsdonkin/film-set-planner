@@ -1,7 +1,7 @@
 import React from "react";
 // redux
 import { connect } from "react-redux";
-import { deselectAllObjects } from "./../actions";
+import { deselectAllObjects, updateStageXYPosition } from "./../actions";
 // v4
 import { v4 } from "uuid";
 // konva
@@ -50,10 +50,12 @@ class Diagram extends React.Component {
   };
 
   render() {
-    const { deselectAllObjects } = this.props;
+    const { deselectAllObjects, updateStageXYPosition } = this.props;
     const refs = [];
     // extract objects from the redux store diagram
-    const { objects } = this.props.diagram;
+    // get stage for X Y positions
+    const { objects, stage } = this.props.diagram;
+
     let keys = Object.keys(objects);
     let objectImagesList = [];
     let lockedObjectImagesList = [];
@@ -76,11 +78,13 @@ class Diagram extends React.Component {
         />
       );
     });
-
+    console.log(this.stageRef);
     return (
       <div className="diagram">
         <Stage
           ref={this.stageRef}
+          x={stage.x}
+          y={stage.y}
           scaleX={this.state.scale}
           scaleY={this.state.scale}
           style={{
@@ -100,6 +104,11 @@ class Diagram extends React.Component {
               deselectAllObjects();
               this.forceUpdate();
             }
+          }}
+          onDragEnd={() => {
+            let newXPos = this.stageRef.current.attrs.x;
+            let newYPos = this.stageRef.current.attrs.y;
+            updateStageXYPosition(newXPos, newYPos);
           }}
           onContextMenu={() => {
             window.oncontextmenu = e => {
@@ -140,6 +149,7 @@ class Diagram extends React.Component {
 }
 
 const mapStateToProps = state => {
+  console.log(state.diagram);
   return {
     diagram: state.diagram
   };
@@ -147,5 +157,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { deselectAllObjects }
+  { deselectAllObjects, updateStageXYPosition }
 )(Diagram);

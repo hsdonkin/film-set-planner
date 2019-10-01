@@ -34,6 +34,14 @@ export const updateXYPosition = (objectID, xValue, yValue) => {
   };
 };
 
+export const updateStageXYPosition = (xValue, yValue) => {
+  return {
+    type: "UPDATE_STAGE_XY_POSITION",
+    x: xValue,
+    y: yValue
+  };
+};
+
 export const updateRotation = (objectID, rotation) => {
   return {
     type: "UPDATE_ROTATION",
