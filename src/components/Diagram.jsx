@@ -116,7 +116,9 @@ class Diagram extends React.Component {
 
             if (
               this.state.scale >= 0.01 &&
-              this.state.scale + scaleChange * 0.0001 >= 0.01
+              this.state.scale + scaleChange * 0.0001 >= 0.01 &&
+              this.state.scale <= 0.3 &&
+              this.state.scale + scaleChange * 0.0001 <= 0.3
             ) {
               this.setState({
                 scale: this.state.scale + scaleChange * 0.0001,
