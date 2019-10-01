@@ -50,13 +50,13 @@ class Diagram extends React.Component {
   };
 
   render() {
-    console.log("stageref", this.stageRef);
     const { deselectAllObjects } = this.props;
     const refs = [];
     // extract objects from the redux store diagram
     const { objects } = this.props.diagram;
     let keys = Object.keys(objects);
     let objectImagesList = [];
+    let lockedObjectImagesList = [];
     keys.forEach(key => {
       refs.push(React.createRef(key));
       objectImagesList.push(
@@ -78,51 +78,63 @@ class Diagram extends React.Component {
     });
 
     return (
-      <Stage
-        ref={this.stageRef}
-        scaleX={this.state.scale}
-        scaleY={this.state.scale}
-        style={{
-          border: "1px whitesmoke solid",
-          display: "inline-block",
-          height: "80vh",
-          width: "75vw"
-        }}
-        width={1000}
-        height={800}
-        offsetX={0}
-        offsetY={0}
-        draggable
-        onMouseDown={e => {
-          // deselect when clicked on empty area
-          const clickedOnEmpty = e.target === e.target.getStage();
-          if (clickedOnEmpty) {
-            // selectShape(null);
-            deselectAllObjects();
-            this.forceUpdate();
-          }
-        }}
-        onContextMenu={() => {
-          window.oncontextmenu = e => {
-            setTimeout(function() {
-              window.oncontextmenu = () => {
-                return true;
-              };
-            }, 100);
-            return false;
-          };
-        }}
-        onWheel={e => {
-          let scaleChange = e.evt.deltaY;
-          this.setState({
-            scale: this.state.scale + scaleChange * 0.0001
-          });
-        }}
-      >
-        <Layer key={v4()} draggable>
-          {objectImagesList}
-        </Layer>
-      </Stage>
+      <div className="diagram">
+        <Stage
+          ref={this.stageRef}
+          scaleX={this.state.scale}
+          scaleY={this.state.scale}
+          style={{
+            border: "1px whitesmoke solid",
+            display: "inline-block"
+          }}
+          width={1000}
+          height={800}
+          offsetX={0}
+          offsetY={0}
+          draggable
+          onMouseDown={e => {
+            // deselect when clicked on empty area
+            const clickedOnEmpty = e.target === e.target.getStage();
+            if (clickedOnEmpty) {
+              // selectShape(null);
+              deselectAllObjects();
+              this.forceUpdate();
+            }
+          }}
+          onContextMenu={() => {
+            window.oncontextmenu = e => {
+              setTimeout(function() {
+                window.oncontextmenu = () => {
+                  return true;
+                };
+              }, 100);
+              return false;
+            };
+          }}
+          onWheel={e => {
+            let scaleChange = e.evt.deltaY;
+
+            if (
+              this.state.scale >= 0.01 &&
+              this.state.scale + scaleChange * 0.0001 >= 0.01 &&
+              this.state.scale <= 0.3 &&
+              this.state.scale + scaleChange * 0.0001 <= 0.3
+            ) {
+              this.setState({
+                scale: this.state.scale + scaleChange * 0.0001,
+                offsetX: this.state.offsetX + 200 * Math.sign(scaleChange),
+                offsetY: this.state.offsetY + 200 * Math.sign(scaleChange)
+              });
+            }
+            console.log(this.state);
+          }}
+        >
+          <Layer key={v4()} draggable>
+            <Group>{objectImagesList}</Group>
+          </Layer>
+          <Layer key={v4()}>{lockedObjectImagesList}</Layer>
+        </Stage>
+      </div>
     );
   }
 }

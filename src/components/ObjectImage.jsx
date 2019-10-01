@@ -440,8 +440,9 @@ class ObjectImage extends React.Component {
 
   render() {
     let rotationAngles;
-
+    let zIndex = 0;
     const {
+      addObjectToDiagram,
       updateXYPosition,
       toggleObjectSelected,
       deselectAllObjects,
@@ -478,7 +479,7 @@ class ObjectImage extends React.Component {
           shadowBlur={50}
           shadowOpacity={0.3}
           image={loadedImage}
-          draggable={"true"}
+          draggable
           dragBoundFunc={position => {
             const canvas = document.getElementsByClassName(
               "konvajs-content"
@@ -523,14 +524,14 @@ class ObjectImage extends React.Component {
           onContextMenu={() => {
             removeObjectFromDiagram(this.props.objectID);
             // prevent the context menu from opening
-            window.oncontextmenu = () => {
-              setTimeout(function() {
-                window.oncontextmenu = () => {
-                  return true;
-                };
-              }, 100);
-              return false;
-            };
+            // window.oncontextmenu = () => {
+            //   setTimeout(function() {
+            //     window.oncontextmenu = () => {
+            //       return true;
+            //     };
+            //   }, 100);
+            //   return false;
+            // };
           }}
           onTransformEnd={event => {
             const stage = event.currentTarget.parent.parent.attrs;

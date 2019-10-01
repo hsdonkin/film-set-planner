@@ -1,22 +1,21 @@
-import React from 'react';
+import React from "react";
 
 // redux
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 import {
   addObjectToDiagram,
   removeObjectFromDiagram,
   toggleObjectSelected
-} from './actions';
+} from "./actions";
 
 // components
-import Diagram from './components/Diagram';
-import Navbar from './components/Navbar';
-import Sidebar from './components/Sidebar';
+import Diagram from "./components/Diagram";
+import Navbar from "./components/Navbar";
+import Sidebar from "./components/Sidebar";
 
 const App = props => {
   return (
     <div className="page-wrap">
-      <Navbar />
       <Sidebar />
       <Diagram />
     </div>
