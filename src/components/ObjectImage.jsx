@@ -437,25 +437,8 @@ class ObjectImage extends React.Component {
       loadedImage: null
     };
   }
-  componentWillMount = () => {
-    //   let loadedImage = new Image();
-    //   loadedImage.src = eval(this.props.imgName);
-    //   this.setState({ loadedImage: loadedImage, loaded: true });
-  };
-  render() {
-    // track key presses for transform
-    // const keys = {};
-    // window.onkeyup = e => {
-    //   keys[e.keyCode] = false;
-    //   console.log(keys);
-    //   this.forceUpdate();
-    // };
-    // window.onkeydown = e => {
-    //   keys[e.keyCode] = true;
-    //   console.log(keys);
-    //   this.forceUpdate();
-    // };
 
+  render() {
     let rotationAngles;
 
     const {
