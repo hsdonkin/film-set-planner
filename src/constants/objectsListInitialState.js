@@ -40,22 +40,22 @@ export const initialState = {
   },
 
   TenFootCurvedRadius: {
-    name: "10 Curved Radius",
+    name: "10 Foot Curved Radius",
     imgName: "TenFootCurvedRadius"
   },
 
   TenByTenCornerRoom: {
-    name: "10 x 10_ Corner Room",
+    name: "10x10 Corner Room",
     imgName: "TenByTenCornerRoom"
   },
 
   TenByTenOpenRoom: {
-    name: "10 x 10_ Open Room",
+    name: "10x10 Open Room",
     imgName: "TenByTenOpenRoom"
   },
 
   TenByTenRoom: {
-    name: "10 x 10_ Room",
+    name: "10x10 Room",
     imgName: "TenByTenRoom"
   },
 
@@ -250,32 +250,32 @@ export const initialState = {
   },
 
   TwentyFootCurvedRadius: {
-    name: "20 Curved Radius",
+    name: "20 Foot Curved Radius",
     imgName: "TwentyFootCurvedRadius"
   },
 
   TwentyByTwentyCornerRoom: {
-    name: "20 x 20_ Corner Room",
+    name: "20x20 Corner Room",
     imgName: "TwentyByTwentyCornerRoom"
   },
 
   TwentyByTwentyOpenRoom: {
-    name: "20 x 20_ Open Room",
+    name: "20x20 Open Room",
     imgName: "TwentyByTwentyOpenRoom"
   },
 
   TwentyByTwentyRoom: {
-    name: "20 x 20_ Room",
+    name: "20x20 Room",
     imgName: "TwentyByTwentyRoom"
   },
 
   TwentyByFortyOpenRoom: {
-    name: "20 x 40_ Open Room",
+    name: "20x40 Open Room",
     imgName: "TwentyByFortyOpenRoom"
   },
 
   TwentyByFortyRoom: {
-    name: "20 x 40_ Room",
+    name: "20x40 Room",
     imgName: "TwentyByFortyRoom"
   },
 

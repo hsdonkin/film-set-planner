@@ -8,8 +8,8 @@ const initialState = {
       selected: false,
       imgPath: "./../assets/Arri M8.png",
       imgName: "ArriM8",
-      x: 100,
-      y: 100,
+      x: 2000,
+      y: 2000,
       rotation: 0
     },
     [v4()]: {
@@ -17,8 +17,8 @@ const initialState = {
       selected: true,
       imgPath: "./../assets/Arri M8.png",
       imgName: "ArriM8",
-      x: 400,
-      y: 400,
+      x: 3000,
+      y: 3000,
       rotation: 50
     }
   }
