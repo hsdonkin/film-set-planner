@@ -37,15 +37,19 @@ const objectDiagramReducer = (state = initialState, action) => {
     case "ADD_TO_DIAGRAM":
       // using JSON parse here to avoid mutating state
       newState = JSON.parse(JSON.stringify(state));
-      console.log("NewState:", newState);
-      console.log("Old State:", state);
+      console.log("stage X", state.stage.x, "Stage Y", state.stage.y);
+      console.log(
+        "spawning at ",
+        -1 * state.stage.x + objectOffset,
+        -1 * state.stage.y + objectOffset
+      );
       newState.objects[v4()] = {
         name: action.object.name,
         imgPath: action.object.imgPath,
         imgName: action.object.imgName,
         selected: false,
-        x: 100 + objectOffset,
-        y: 100 + objectOffset,
+        x: (-1 * state.stage.x) / 0.2 + objectOffset,
+        y: (-1 * state.stage.y) / 0.2 + objectOffset,
         rotation: 0
       };
       clearInterval(offsetTimer);
@@ -95,6 +99,7 @@ const objectDiagramReducer = (state = initialState, action) => {
 
     case "UPDATE_STAGE_XY_POSITION":
       newState = JSON.parse(JSON.stringify(state));
+      clearInterval(offsetTimer);
       newState.stage = {
         x: action.x,
         y: action.y

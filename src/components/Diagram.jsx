@@ -93,8 +93,8 @@ class Diagram extends React.Component {
           }}
           width={1000}
           height={800}
-          offsetX={0}
-          offsetY={0}
+          offsetX={-2000}
+          offsetY={-1600}
           draggable
           onMouseDown={e => {
             // deselect when clicked on empty area
