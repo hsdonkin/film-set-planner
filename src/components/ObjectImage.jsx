@@ -284,7 +284,6 @@ const GreenOneTwoftPaper = require("./../assets/Green 12ft Paper.png");
 const GridRoll = require("./../assets/Grid Roll.png");
 const HLabel = require("./../assets/H Label.png");
 const Hazer = require("./../assets/Hazer.png");
-const Hedge = require("./../assets/Hedge.png");
 const IndustrialFan = require("./../assets/Industrial Fan.png");
 const JLabel = require("./../assets/J Label.png");
 const JokerOneSix00Softube = require("./../assets/Joker 1600 Softube.png");
@@ -433,23 +432,29 @@ class ObjectImage extends React.Component {
     this.KonvaImageRef = React.createRef();
     this.trRef = React.createRef();
     this.state = {
-      selected: this.props.selected
+      selected: this.props.selected,
+      loaded: false,
+      loadedImage: null
     };
   }
-  componentDidMount = () => {};
+  componentWillMount = () => {
+    //   let loadedImage = new Image();
+    //   loadedImage.src = eval(this.props.imgName);
+    //   this.setState({ loadedImage: loadedImage, loaded: true });
+  };
   render() {
     // track key presses for transform
-    const keys = {};
-    window.onkeyup = e => {
-      keys[e.keyCode] = false;
-      console.log(keys);
-      this.forceUpdate();
-    };
-    window.onkeydown = e => {
-      keys[e.keyCode] = true;
-      console.log(keys);
-      this.forceUpdate();
-    };
+    // const keys = {};
+    // window.onkeyup = e => {
+    //   keys[e.keyCode] = false;
+    //   console.log(keys);
+    //   this.forceUpdate();
+    // };
+    // window.onkeydown = e => {
+    //   keys[e.keyCode] = true;
+    //   console.log(keys);
+    //   this.forceUpdate();
+    // };
 
     let rotationAngles;
 
@@ -465,6 +470,13 @@ class ObjectImage extends React.Component {
     let rotation = this.props.rotation;
     // eval so that we can dynamically select images
     let loadedImage = new Image();
+    // need to toggle loaded state so that images make it to the page when loaded
+    // this conditional is REALLY important, because otherwise it spams state updates whenever a component is moved
+    if (this.state.loaded === false) {
+      loadedImage.onload = () => {
+        this.setState({ ...this.state, loaded: true });
+      };
+    }
     loadedImage.src = eval(this.props.imgName);
 
     if (this.state.selected === true) {
@@ -491,9 +503,6 @@ class ObjectImage extends React.Component {
             let { height, width } = canvas.style;
             height = parseInt(height);
             width = parseInt(width);
-            console.log(height);
-            console.log(width);
-            console.log(position.x, position.y);
 
             // handle left and upper bounds
             if (position.x <= 10) {
@@ -504,11 +513,11 @@ class ObjectImage extends React.Component {
             }
 
             // lower and outer bounds
-            if (position.x >= width - 120) {
-              position.x = width - 120;
+            if (position.x >= width - 50) {
+              position.x = width - 50;
             }
 
-            if (position.y >= height - 120) {
+            if (position.y >= height - 50) {
               position.y = height - 120;
             }
 
@@ -521,18 +530,12 @@ class ObjectImage extends React.Component {
             // update the X Y position by sending an action to redux store
             const newXPos = event.currentTarget.attrs.x;
             const newYPos = event.currentTarget.attrs.y;
-            console.log(event.currentTarget.attrs);
             const newRotation = event.currentTarget.attrs.rotation;
             updateXYPosition(this.props.objectID, newXPos, newYPos);
             updateRotation(this.props.objectID, newRotation);
           }}
           onClick={() => {
-            console.log("clicked");
-            deselectAllObjects();
             this.setState({ selected: !this.state.selected });
-            if (keys[16] === true) {
-              console.log(rotationAngles);
-            }
           }}
           onContextMenu={() => {
             removeObjectFromDiagram(this.props.objectID);
@@ -548,8 +551,6 @@ class ObjectImage extends React.Component {
           }}
           onTransformEnd={event => {
             const stage = event.currentTarget.parent.parent.attrs;
-            console.log(stage);
-            console.log(event.currentTarget);
             const newXPos = event.currentTarget.attrs.x;
             const newYPos = event.currentTarget.attrs.y;
             const newRotation = event.currentTarget.attrs.rotation;

@@ -1,3 +1,21 @@
 canvas {
   border: 1px whitesmoke solid;
 }
+
+.sidebar {
+  float: left;
+  display: inline;
+  height: 80vh;
+  overflow: scroll;
+}
+.sidebar button {
+  display: block;
+}
+
+.konvajs-content {
+  margin: 0;
+}
+
+canvas {
+  display: inline-block;
+}

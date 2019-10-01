@@ -6,36 +6,41 @@
 */
 
 // react dependencies
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
 // hot reload for development
-import { AppContainer } from 'react-hot-loader';
+import { AppContainer } from "react-hot-loader";
 
 // react redux
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, compose } from 'redux';
-import rootReducer from './reducers';
-import logger from 'redux-logger';
-import persistDataLocally from './middleware'
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware, compose } from "redux";
+import rootReducer from "./reducers";
+import logger from "redux-logger";
+import persistDataLocally from "./middleware";
+import thunk from "redux-thunk";
 
 let retrievedState;
 try {
-  retrievedState = localStorage.getItem('reduxStore');
-  if (retrievedState === null){
+  retrievedState = localStorage.getItem("reduxStore");
+  if (retrievedState === null) {
     retrievedState = {};
   }
   retrievedState = JSON.parse(retrievedState);
-} catch (err){
+} catch (err) {
   retrievedState = {};
 }
 
-const store = createStore(rootReducer, retrievedState, applyMiddleware(logger, persistDataLocally));
+const store = createStore(
+  rootReducer,
+  retrievedState,
+  applyMiddleware(logger, thunk, persistDataLocally)
+);
 
-import App from './App';
+import App from "./App";
 
-import './style.scss';
+import "./style.scss";
 
-const root = document.getElementById('root');
+const root = document.getElementById("root");
 
 const render = Component => {
   ReactDOM.render(
@@ -51,7 +56,7 @@ const render = Component => {
 render(App);
 
 if (module.hot) {
-  module.hot.accept('./App', () => {
+  module.hot.accept("./App", () => {
     render(App);
   });
 }

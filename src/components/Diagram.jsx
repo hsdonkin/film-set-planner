@@ -1,72 +1,86 @@
-import React from 'react';
+import React from "react";
 // redux
-import { connect } from 'react-redux';
-import {deselectAllObjects} from './../actions'
+import { connect } from "react-redux";
+import { deselectAllObjects } from "./../actions";
 // v4
-import { v4 } from 'uuid';
+import { v4 } from "uuid";
 // konva
-import { Stage, Layer, Group, Transformer } from 'react-konva';
+import { Stage, Layer, Group, Transformer } from "react-konva";
+import { useStrictMode } from "react-konva";
 
-
+useStrictMode(true);
 
 // dynamic image layer
-import ObjectImage from './ObjectImage';
+import ObjectImage from "./ObjectImage";
 
 class Diagram extends React.Component {
   constructor(props) {
     super(props);
-    this.refs = []
+    this.refs = [];
     this.state = {
-      objects: this.props.objects,
-    }
+      objects: this.props.objects
+    };
   }
 
+  componentDidMount = () => {
+    // shitty solution to fix image load times
+  };
 
   shouldComponentUpdate = (nextProps, nextState) => {
     // need to check how many properties diagram.objects has
     // this tells us if a new thing was added to the diagram, if not don't update it
     // disabling this creates performance issues where the diagram flickers
-    if (Object.keys(nextProps.diagram.objects).length === Object.keys(this.props.diagram.objects).length){
-      return false
-    }else{
-      return true
-    }
-  }
+
+    // having issues where this conditional randomly stopped working ???
+
+    // if (
+    //   Object.keys(nextProps.diagram.objects).length ===
+    //   Object.keys(this.props.diagram.objects).length
+    // ) {
+    //   return false;
+    // } else {
+    //   console.log("diagram is updating");
+    //   return true;
+    // }
+    return true;
+  };
 
   render() {
-    const {deselectAllObjects} = this.props
-    const refs = []
+    const { deselectAllObjects } = this.props;
+    const refs = [];
     // extract objects from the redux store diagram
     const { objects } = this.props.diagram;
     let keys = Object.keys(objects);
     let objectImagesList = [];
     keys.forEach(key => {
-      refs.push(React.createRef(key))
+      refs.push(React.createRef(key));
       objectImagesList.push(
-      
-          <ObjectImage
-            ref={key}
-            key={key}
-            imgName={objects[key].imgName}
-            objectID = {key}
-            x={objects[key].x}
-            y={objects[key].y}
-            rotation={objects[key].rotation}
-            selected={objects[key.selected]}
-            stageDimensions={{width:window.innerWidth,height:window.innerHeight}}
-          />
-          
-       
+        <ObjectImage
+          ref={key}
+          key={key}
+          imgName={objects[key].imgName}
+          objectID={key}
+          x={objects[key].x}
+          y={objects[key].y}
+          rotation={objects[key].rotation}
+          selected={objects[key.selected]}
+          stageDimensions={{
+            width: window.innerWidth,
+            height: window.innerHeight
+          }}
+        />
       );
     });
 
     return (
       <Stage
-      
         scaleX={0.5}
         scaleY={0.5}
-        style={{ border: '1px whitesmoke solid' }}
-        width={window.innerWidth}
+        style={{
+          border: "1px whitesmoke solid",
+          display: "inline-block"
+        }}
+        width={window.innerWidth * 0.75}
         height={window.innerHeight * 0.75}
         onMouseDown={e => {
           // deselect when clicked on empty area
@@ -77,21 +91,19 @@ class Diagram extends React.Component {
             this.forceUpdate();
           }
         }}
-        onContextMenu = {
-          () => {
-            window.oncontextmenu = (e) => {
-              setTimeout(function(){
-                window.oncontextmenu = () => {
-                  return true
-                }
-              }, 100)
-              return false
-            }
-          }
-        }
+        onContextMenu={() => {
+          window.oncontextmenu = e => {
+            setTimeout(function() {
+              window.oncontextmenu = () => {
+                return true;
+              };
+            }, 100);
+            return false;
+          };
+        }}
       >
         <Layer key={v4()} draggable>
-        {objectImagesList}
+          {objectImagesList}
         </Layer>
       </Stage>
     );
@@ -104,4 +116,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, {deselectAllObjects})(Diagram);
+export default connect(
+  mapStateToProps,
+  { deselectAllObjects }
+)(Diagram);
