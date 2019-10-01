@@ -433,23 +433,28 @@ class ObjectImage extends React.Component {
     this.trRef = React.createRef();
     this.state = {
       selected: this.props.selected,
-      loaded: false
+      loaded: false,
+      loadedImage: null
     };
   }
-  componentDidMount = () => {};
+  componentWillMount = () => {
+    //   let loadedImage = new Image();
+    //   loadedImage.src = eval(this.props.imgName);
+    //   this.setState({ loadedImage: loadedImage, loaded: true });
+  };
   render() {
     // track key presses for transform
-    const keys = {};
-    window.onkeyup = e => {
-      keys[e.keyCode] = false;
-      console.log(keys);
-      this.forceUpdate();
-    };
-    window.onkeydown = e => {
-      keys[e.keyCode] = true;
-      console.log(keys);
-      this.forceUpdate();
-    };
+    // const keys = {};
+    // window.onkeyup = e => {
+    //   keys[e.keyCode] = false;
+    //   console.log(keys);
+    //   this.forceUpdate();
+    // };
+    // window.onkeydown = e => {
+    //   keys[e.keyCode] = true;
+    //   console.log(keys);
+    //   this.forceUpdate();
+    // };
 
     let rotationAngles;
 
@@ -466,9 +471,12 @@ class ObjectImage extends React.Component {
     // eval so that we can dynamically select images
     let loadedImage = new Image();
     // need to toggle loaded state so that images make it to the page when loaded
-    loadedImage.onload = () => {
-      this.setState({ loaded: true });
-    };
+    // this conditional is REALLY important, because otherwise it spams state updates whenever a component is moved
+    if (this.state.loaded === false) {
+      loadedImage.onload = () => {
+        this.setState({ ...this.state, loaded: true });
+      };
+    }
     loadedImage.src = eval(this.props.imgName);
 
     if (this.state.selected === true) {
