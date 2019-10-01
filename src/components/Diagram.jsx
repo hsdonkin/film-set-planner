@@ -17,14 +17,18 @@ class Diagram extends React.Component {
   constructor(props) {
     super(props);
     this.refs = [];
+    this.stageRef = React.createRef();
     this.state = {
-      objects: this.props.objects
+      objects: this.props.objects,
+      scale: 0.2,
+      offsetX: 0,
+      offsetY: 0
     };
   }
 
-  componentDidMount = () => {
-    // shitty solution to fix image load times
-  };
+  handleScaleChange = () => {};
+
+  handleResizeChange = () => {};
 
   shouldComponentUpdate = (nextProps, nextState) => {
     // need to check how many properties diagram.objects has
@@ -46,6 +50,7 @@ class Diagram extends React.Component {
   };
 
   render() {
+    console.log("stageref", this.stageRef);
     const { deselectAllObjects } = this.props;
     const refs = [];
     // extract objects from the redux store diagram
@@ -74,14 +79,20 @@ class Diagram extends React.Component {
 
     return (
       <Stage
-        scaleX={0.5}
-        scaleY={0.5}
+        ref={this.stageRef}
+        scaleX={this.state.scale}
+        scaleY={this.state.scale}
         style={{
           border: "1px whitesmoke solid",
-          display: "inline-block"
+          display: "inline-block",
+          height: "80vh",
+          width: "75vw"
         }}
-        width={window.innerWidth * 0.75}
-        height={window.innerHeight * 0.75}
+        width={1000}
+        height={800}
+        offsetX={0}
+        offsetY={0}
+        draggable
         onMouseDown={e => {
           // deselect when clicked on empty area
           const clickedOnEmpty = e.target === e.target.getStage();
@@ -100,6 +111,12 @@ class Diagram extends React.Component {
             }, 100);
             return false;
           };
+        }}
+        onWheel={e => {
+          let scaleChange = e.evt.deltaY;
+          this.setState({
+            scale: this.state.scale + scaleChange * 0.0001
+          });
         }}
       >
         <Layer key={v4()} draggable>
