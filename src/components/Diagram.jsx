@@ -1,7 +1,11 @@
 import React from "react";
 // redux
 import { connect } from "react-redux";
-import { deselectAllObjects, updateStageXYPosition } from "./../actions";
+import {
+  deselectAllObjects,
+  updateStageXYPosition,
+  updateStageScale
+} from "./../actions";
 // v4
 import { v4 } from "uuid";
 // konva
@@ -50,7 +54,11 @@ class Diagram extends React.Component {
   };
 
   render() {
-    const { deselectAllObjects, updateStageXYPosition } = this.props;
+    const {
+      deselectAllObjects,
+      updateStageXYPosition,
+      updateStageScale
+    } = this.props;
     const refs = [];
     // extract objects from the redux store diagram
     // get stage for X Y positions
@@ -134,6 +142,7 @@ class Diagram extends React.Component {
                 offsetX: this.state.offsetX + 200 * Math.sign(scaleChange),
                 offsetY: this.state.offsetY + 200 * Math.sign(scaleChange)
               });
+              // updateStageScale(this.state.scale + scaleChange * 0.0001);
             }
             console.log(this.state);
           }}
@@ -157,5 +166,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { deselectAllObjects, updateStageXYPosition }
+  { deselectAllObjects, updateStageXYPosition, updateStageScale }
 )(Diagram);

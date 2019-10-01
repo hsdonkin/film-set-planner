@@ -512,8 +512,8 @@ class ObjectImage extends React.Component {
           }}
           onDragEnd={event => {
             // update the X Y position by sending an action to redux store
-            const newXPos = event.currentTarget.attrs.x;
-            const newYPos = event.currentTarget.attrs.y;
+            let newXPos = event.currentTarget.attrs.x;
+            let newYPos = event.currentTarget.attrs.y;
             const newRotation = event.currentTarget.attrs.rotation;
             updateXYPosition(this.props.objectID, newXPos, newYPos);
             updateRotation(this.props.objectID, newRotation);
@@ -538,12 +538,12 @@ class ObjectImage extends React.Component {
             const newXPos = event.currentTarget.attrs.x;
             const newYPos = event.currentTarget.attrs.y;
             const newRotation = event.currentTarget.attrs.rotation;
-            if (event.currentTarget.attrs.x <= 0) {
-              newXPos = 0;
-            }
-            if (event.currentTarget.attrs.x <= 0) {
-              newYPos = 0;
-            }
+            // if (event.currentTarget.attrs.x <= 0) {
+            //   newXPos = 0;
+            // }
+            // if (event.currentTarget.attrs.x <= 0) {
+            //   newYPos = 0;
+            // }
             updateXYPosition(this.props.objectID, newXPos, newYPos);
             updateRotation(this.props.objectID, newRotation);
           }}

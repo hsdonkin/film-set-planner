@@ -42,6 +42,13 @@ export const updateStageXYPosition = (xValue, yValue) => {
   };
 };
 
+export const updateStageScale = scale => {
+  return {
+    type: "UPDATE_STAGE_SCALE",
+    scale: scale
+  };
+};
+
 export const updateRotation = (objectID, rotation) => {
   return {
     type: "UPDATE_ROTATION",

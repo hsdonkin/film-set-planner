@@ -13,8 +13,8 @@ const initialState = {
       selected: false,
       imgPath: "./../assets/Arri M8.png",
       imgName: "ArriM8",
-      x: 2000,
-      y: 2000,
+      x: 0,
+      y: 0,
       rotation: 0
     },
     [v4()]: {
@@ -22,8 +22,8 @@ const initialState = {
       selected: true,
       imgPath: "./../assets/Arri M8.png",
       imgName: "ArriM8",
-      x: 3000,
-      y: 3000,
+      x: 500,
+      y: 500,
       rotation: 50
     }
   }
@@ -105,6 +105,14 @@ const objectDiagramReducer = (state = initialState, action) => {
         y: action.y
       };
       return newState;
+
+    case "UPDATE_STAGE_SCALE":
+      // using JSON parse here to avoid mutating state
+      newState = JSON.parse(JSON.stringify(state));
+      clearInterval(offsetTimer);
+      newState.stage.scale = action.scale;
+      return newState;
+
     case "UPDATE_ROTATION":
       // using JSON parse here to avoid mutating state
       newState = JSON.parse(JSON.stringify(state));
