@@ -41,7 +41,10 @@ files.map(file => {
     .replace(/9/g, "Eight")
     .replace(/10/g, "Nine");
 
-  objectName = objectName.replace(".png", "").replace("_", "");
+  objectName = objectName
+    .replace(".png", "")
+    .replace("_", "")
+    .replace("_", "");
 
   fs.appendFile(
     "objectsList.js",

@@ -5,8 +5,9 @@ canvas {
 .sidebar {
   float: left;
   display: inline;
+  padding-top: 10px;
   height: 80vh;
-  overflow: scroll;
+  overflow-y: scroll;
 }
 .sidebar button {
   display: block;
