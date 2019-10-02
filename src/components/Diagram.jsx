@@ -33,9 +33,10 @@ class Diagram extends React.Component {
     super(props);
     this.refs = [];
     this.stageRef = React.createRef();
+    this.scaleTimer;
     this.state = {
       objects: this.props.objects,
-      scale: 0.2,
+      scale: this.props.diagram.stage.scale,
       offsetX: -2800,
       offsetY: -1600,
       loaded: false
@@ -77,6 +78,10 @@ class Diagram extends React.Component {
     //   return true;
     // }
     return true;
+  };
+
+  componentWillUnmount = () => {
+    clearInterval(this.scaleTimer);
   };
 
   render() {
@@ -182,6 +187,7 @@ class Diagram extends React.Component {
             let newXPos = this.stageRef.current.attrs.x;
             let newYPos = this.stageRef.current.attrs.y;
             updateStageXYPosition(newXPos, newYPos);
+            updateStageScale(this.state.scale);
           }}
           onContextMenu={() => {
             window.oncontextmenu = e => {
@@ -194,6 +200,13 @@ class Diagram extends React.Component {
             };
           }}
           onWheel={e => {
+            // setTimeout to increase performance, just update the redux store with a new scale after a second
+            // more performant than every time a wheel event takes place
+            clearInterval(this.scaleTimer);
+            this.scaleTimer = setTimeout(() => {
+              updateStageScale(this.state.scale);
+            }, 1000);
+
             let scaleChange = e.evt.deltaY;
 
             if (
