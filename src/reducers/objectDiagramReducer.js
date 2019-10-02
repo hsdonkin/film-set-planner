@@ -5,6 +5,8 @@ const initialState = {
   stage: {
     x: 0,
     y: 0,
+    offsetX: -2800,
+    offsetY: -1800,
     scale: 0.2
   },
   objects: {
@@ -43,20 +45,21 @@ const objectDiagramReducer = (state = initialState, action) => {
         -1 * state.stage.x + objectOffset,
         -1 * state.stage.y + objectOffset
       );
+      console.log("offset", objectOffset);
       newState.objects[v4()] = {
         name: action.object.name,
         imgPath: action.object.imgPath,
         imgName: action.object.imgName,
         selected: false,
-        x: (-1 * state.stage.x) / 0.2 + objectOffset,
-        y: (-1 * state.stage.y) / 0.2 + objectOffset,
+        x: -1 * state.stage.x + objectOffset,
+        y: -1 * state.stage.y + objectOffset,
         rotation: 0
       };
       clearInterval(offsetTimer);
       objectOffset += 50;
       offsetTimer = setTimeout(function() {
         objectOffset = 0;
-      }, 2000);
+      }, 1000);
       return newState;
     case "REMOVE_FROM_DIAGRAM":
       // using JSON parse here to avoid mutating state
@@ -106,6 +109,17 @@ const objectDiagramReducer = (state = initialState, action) => {
       };
       return newState;
 
+    case "RESET_STAGE_XY_POSITION":
+      newState = JSON.parse(JSON.stringify(state));
+      clearInterval(offsetTimer);
+      newState.stage = {
+        x: 0,
+        y: 0,
+        offsetX: -2800,
+        offsetY: -1800,
+        scale: 0.2
+      };
+      return newState;
     case "UPDATE_STAGE_SCALE":
       // using JSON parse here to avoid mutating state
       newState = JSON.parse(JSON.stringify(state));

@@ -452,7 +452,7 @@ class ObjectImage extends React.Component {
     let xPos = this.props.x;
     let yPos = this.props.y;
     let rotation = this.props.rotation;
-    // eval so that we can dynamically select images
+
     let loadedImage = new Image();
     // need to toggle loaded state so that images make it to the page when loaded
     // this conditional is REALLY important, because otherwise it spams state updates whenever a component is moved
@@ -461,6 +461,7 @@ class ObjectImage extends React.Component {
         this.setState({ ...this.state, loaded: true });
       };
     }
+    // eval so that we can dynamically select images
     loadedImage.src = eval(this.props.imgName);
 
     if (this.state.selected === true) {

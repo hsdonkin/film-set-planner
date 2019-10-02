@@ -42,6 +42,12 @@ export const updateStageXYPosition = (xValue, yValue) => {
   };
 };
 
+export const resetStageXYPosition = () => {
+  return {
+    type: "RESET_STAGE_XY_POSITION"
+  };
+};
+
 export const updateStageScale = scale => {
   return {
     type: "UPDATE_STAGE_SCALE",

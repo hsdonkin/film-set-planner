@@ -4,13 +4,24 @@ import { connect } from "react-redux";
 import {
   deselectAllObjects,
   updateStageXYPosition,
+  resetStageXYPosition,
   updateStageScale
 } from "./../actions";
 // v4
 import { v4 } from "uuid";
 // konva
-import { Stage, Layer, Group, Transformer } from "react-konva";
+import {
+  Stage,
+  Layer,
+  Group,
+  Transformer,
+  Image as KonvaImage,
+  Rect
+} from "react-konva";
 import { useStrictMode } from "react-konva";
+
+// graph pattern
+const graphPattern = require("./../assets/four-graph-pattern.png");
 
 useStrictMode(true);
 
@@ -25,8 +36,9 @@ class Diagram extends React.Component {
     this.state = {
       objects: this.props.objects,
       scale: 0.2,
-      offsetX: 0,
-      offsetY: 0
+      offsetX: -2800,
+      offsetY: -1600,
+      loaded: false
     };
   }
 
@@ -54,6 +66,7 @@ class Diagram extends React.Component {
   };
 
   render() {
+    console.log("current offset", this.state.offsetX, this.state.offsetY);
     const {
       deselectAllObjects,
       updateStageXYPosition,
@@ -86,7 +99,24 @@ class Diagram extends React.Component {
         />
       );
     });
-    console.log(this.stageRef);
+
+    // graph paper loading
+    let loadedImage = new Image();
+    if (this.state.loaded === false) {
+      loadedImage.onload = () => {
+        this.setState({ ...this.state, loaded: true });
+      };
+    }
+    loadedImage.src = graphPattern;
+    // change the texture when scale hits a certain window
+    let gridScale = 4;
+    if (this.state.scale <= 0.1 && this.state.scale >= 0.05) {
+      console.log("updating grid scale");
+      gridScale = 10;
+    } else if (this.state.scale <= 0.05) {
+      gridScale = 30;
+    }
+
     return (
       <div className="diagram">
         <Stage
@@ -101,8 +131,8 @@ class Diagram extends React.Component {
           }}
           width={1000}
           height={800}
-          offsetX={-2000}
-          offsetY={-1600}
+          offsetX={this.state.offsetX}
+          offsetY={this.state.offsetY}
           draggable
           onMouseDown={e => {
             // deselect when clicked on empty area
@@ -138,15 +168,38 @@ class Diagram extends React.Component {
               this.state.scale + scaleChange * 0.0001 <= 0.3
             ) {
               this.setState({
-                scale: this.state.scale + scaleChange * 0.0001,
-                offsetX: this.state.offsetX + 200 * Math.sign(scaleChange),
-                offsetY: this.state.offsetY + 200 * Math.sign(scaleChange)
+                ...this.state,
+                scale: this.state.scale + scaleChange * 0.0001
               });
+              // this.setState({
+              //   scale: this.state.scale + scaleChange * 0.0001,
+              //   offsetX:
+              //     this.state.offsetX +
+              //     scaleChange * 0.5 * Math.sign(scaleChange),
+              //   offsetY:
+              //     this.state.offsetY +
+              //     scaleChange * 0.5 * Math.sign(scaleChange)
+              // });
               // updateStageScale(this.state.scale + scaleChange * 0.0001);
             }
             console.log(this.state);
           }}
         >
+          <Layer>
+            <Rect
+              x={0}
+              y={0}
+              scaleX={gridScale}
+              scaleY={gridScale}
+              offsetX={4000}
+              offsetY={4000}
+              height={8000}
+              width={8000}
+              fillPatternImage={loadedImage}
+              fillPatternRepeat={"repeat"}
+              opacity={0.3}
+            />
+          </Layer>
           <Layer key={v4()} draggable>
             <Group>{objectImagesList}</Group>
           </Layer>
@@ -166,5 +219,10 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { deselectAllObjects, updateStageXYPosition, updateStageScale }
+  {
+    deselectAllObjects,
+    updateStageXYPosition,
+    resetStageXYPosition,
+    updateStageScale
+  }
 )(Diagram);

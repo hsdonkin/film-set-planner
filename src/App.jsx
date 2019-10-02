@@ -12,10 +12,13 @@ import {
 import Diagram from "./components/Diagram";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
+// toolbar
+import Toolbar from "./components/Toolbar";
 
 const App = props => {
   return (
     <div className="page-wrap">
+      <Toolbar />
       <Sidebar />
       <Diagram />
     </div>
