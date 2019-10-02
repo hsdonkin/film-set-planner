@@ -13,11 +13,10 @@ import { AppContainer } from "react-hot-loader";
 
 // react redux
 import { Provider } from "react-redux";
-import { createStore, applyMiddleware, compose } from "redux";
+import { createStore, applyMiddleware } from "redux";
 import rootReducer from "./reducers";
 import logger from "redux-logger";
 import persistDataLocally from "./middleware";
-import thunk from "redux-thunk";
 
 let retrievedState;
 try {
