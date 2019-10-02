@@ -81,10 +81,11 @@ class Diagram extends React.Component {
   };
 
   componentWillUnmount = () => {
-    clearInterval(this.scaleTimer);
+    // clearInterval(this.scaleTimer);
   };
 
   render() {
+    console.log(this.state);
     console.log(this.props);
 
     console.log("current offset", this.state.offsetX, this.state.offsetY);
@@ -187,7 +188,7 @@ class Diagram extends React.Component {
             let newXPos = this.stageRef.current.attrs.x;
             let newYPos = this.stageRef.current.attrs.y;
             updateStageXYPosition(newXPos, newYPos);
-            updateStageScale(this.state.scale);
+            updateStageScale(stage.scale);
           }}
           onContextMenu={() => {
             window.oncontextmenu = e => {
@@ -203,10 +204,6 @@ class Diagram extends React.Component {
             // setTimeout to increase performance, just update the redux store with a new scale after a second
             // more performant than every time a wheel event takes place
             clearInterval(this.scaleTimer);
-            this.scaleTimer = setTimeout(() => {
-              updateStageScale(this.state.scale);
-            }, 1000);
-
             let scaleChange = e.evt.deltaY;
 
             if (
@@ -230,6 +227,19 @@ class Diagram extends React.Component {
               // });
               // updateStageScale(this.state.scale + scaleChange * 0.0001);
             }
+            console.log(
+              "value of this.state.scale outside of setTImeout",
+              this.state.scale
+            );
+
+            this.scaleTimer = setTimeout(() => {
+              console.log(
+                "value of this.state.scale in setTimeout",
+                this.state.scale
+              );
+              updateStageScale(this.state.scale);
+              updateStageScale(this.state.scale);
+            }, 1000);
             console.log(this.state);
           }}
         >
