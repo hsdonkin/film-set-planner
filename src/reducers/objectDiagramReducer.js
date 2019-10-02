@@ -2,14 +2,21 @@ import { v4 } from "uuid";
 
 const initialState = {
   selection: true,
+  stage: {
+    x: 0,
+    y: 0,
+    offsetX: -2800,
+    offsetY: -1800,
+    scale: 0.2
+  },
   objects: {
     [v4()]: {
       name: "Arri M8",
       selected: false,
       imgPath: "./../assets/Arri M8.png",
       imgName: "ArriM8",
-      x: 2000,
-      y: 2000,
+      x: 0,
+      y: 0,
       rotation: 0
     },
     [v4()]: {
@@ -17,8 +24,8 @@ const initialState = {
       selected: true,
       imgPath: "./../assets/Arri M8.png",
       imgName: "ArriM8",
-      x: 3000,
-      y: 3000,
+      x: 500,
+      y: 500,
       rotation: 50
     }
   }
@@ -32,22 +39,27 @@ const objectDiagramReducer = (state = initialState, action) => {
     case "ADD_TO_DIAGRAM":
       // using JSON parse here to avoid mutating state
       newState = JSON.parse(JSON.stringify(state));
-      console.log("NewState:", newState);
-      console.log("Old State:", state);
+      console.log("stage X", state.stage.x, "Stage Y", state.stage.y);
+      console.log(
+        "spawning at ",
+        -1 * state.stage.x + objectOffset,
+        -1 * state.stage.y + objectOffset
+      );
+      console.log("offset", objectOffset);
       newState.objects[v4()] = {
         name: action.object.name,
         imgPath: action.object.imgPath,
         imgName: action.object.imgName,
         selected: false,
-        x: 100 + objectOffset,
-        y: 100 + objectOffset,
+        x: -1 * state.stage.x + objectOffset,
+        y: -1 * state.stage.y + objectOffset,
         rotation: 0
       };
       clearInterval(offsetTimer);
       objectOffset += 50;
       offsetTimer = setTimeout(function() {
         objectOffset = 0;
-      }, 2000);
+      }, 1000);
       return newState;
     case "REMOVE_FROM_DIAGRAM":
       // using JSON parse here to avoid mutating state
@@ -86,6 +98,33 @@ const objectDiagramReducer = (state = initialState, action) => {
       newState = JSON.parse(JSON.stringify(state));
       newState.objects[action.objectID].x = action.x;
       newState.objects[action.objectID].y = action.y;
+      return newState;
+
+    case "UPDATE_STAGE_XY_POSITION":
+      newState = JSON.parse(JSON.stringify(state));
+      clearInterval(offsetTimer);
+      newState.stage = {
+        x: action.x,
+        y: action.y
+      };
+      return newState;
+
+    case "RESET_STAGE_XY_POSITION":
+      newState = JSON.parse(JSON.stringify(state));
+      clearInterval(offsetTimer);
+      newState.stage = {
+        x: 0,
+        y: 0,
+        offsetX: -2800,
+        offsetY: -1800,
+        scale: 0.2
+      };
+      return newState;
+    case "UPDATE_STAGE_SCALE":
+      // using JSON parse here to avoid mutating state
+      newState = JSON.parse(JSON.stringify(state));
+      clearInterval(offsetTimer);
+      newState.stage.scale = action.scale;
       return newState;
 
     case "UPDATE_ROTATION":

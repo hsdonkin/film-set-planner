@@ -2,6 +2,32 @@ canvas {
   border: 1px whitesmoke solid;
 }
 
+.toolbar {
+  display: block;
+  height: 3vh;
+  padding-right: 200px;
+}
+
+.toolbar button {
+  float: right;
+  margin-bottom: 1rem !important;
+  background-color: steelblue;
+  border: none;
+  color: white;
+  padding: 0.5rem;
+  text-align: center;
+  text-decoration: none;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+}
+
+.toolbar button:hover {
+  background-color: lightsteelblue;
+}
+.toolbar button:focus {
+  outline: 0;
+}
+
 .sidebar {
   float: left;
   display: inline;
@@ -11,6 +37,23 @@ canvas {
 }
 .sidebar button {
   display: block;
+  margin-bottom: 1rem !important;
+  background-color: gray;
+  border: none;
+  color: white;
+  padding: 0.5rem;
+  text-align: center;
+  text-decoration: none;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+}
+
+.sidebar button:hover {
+  background-color: rgb(143, 143, 143);
+}
+
+.sidebar button:focus {
+  outline: 0;
 }
 
 .konvajs-content {

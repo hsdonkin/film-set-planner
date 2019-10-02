@@ -452,7 +452,7 @@ class ObjectImage extends React.Component {
     let xPos = this.props.x;
     let yPos = this.props.y;
     let rotation = this.props.rotation;
-    // eval so that we can dynamically select images
+
     let loadedImage = new Image();
     // need to toggle loaded state so that images make it to the page when loaded
     // this conditional is REALLY important, because otherwise it spams state updates whenever a component is moved
@@ -461,6 +461,7 @@ class ObjectImage extends React.Component {
         this.setState({ ...this.state, loaded: true });
       };
     }
+    // eval so that we can dynamically select images
     loadedImage.src = eval(this.props.imgName);
 
     if (this.state.selected === true) {
@@ -512,8 +513,8 @@ class ObjectImage extends React.Component {
           }}
           onDragEnd={event => {
             // update the X Y position by sending an action to redux store
-            const newXPos = event.currentTarget.attrs.x;
-            const newYPos = event.currentTarget.attrs.y;
+            let newXPos = event.currentTarget.attrs.x;
+            let newYPos = event.currentTarget.attrs.y;
             const newRotation = event.currentTarget.attrs.rotation;
             updateXYPosition(this.props.objectID, newXPos, newYPos);
             updateRotation(this.props.objectID, newRotation);
@@ -524,26 +525,26 @@ class ObjectImage extends React.Component {
           onContextMenu={() => {
             removeObjectFromDiagram(this.props.objectID);
             // prevent the context menu from opening
-            // window.oncontextmenu = () => {
-            //   setTimeout(function() {
-            //     window.oncontextmenu = () => {
-            //       return true;
-            //     };
-            //   }, 100);
-            //   return false;
-            // };
+            window.oncontextmenu = () => {
+              setTimeout(function() {
+                window.oncontextmenu = () => {
+                  return true;
+                };
+              }, 100);
+              return false;
+            };
           }}
           onTransformEnd={event => {
             const stage = event.currentTarget.parent.parent.attrs;
             const newXPos = event.currentTarget.attrs.x;
             const newYPos = event.currentTarget.attrs.y;
             const newRotation = event.currentTarget.attrs.rotation;
-            if (event.currentTarget.attrs.x <= 0) {
-              newXPos = 0;
-            }
-            if (event.currentTarget.attrs.x <= 0) {
-              newYPos = 0;
-            }
+            // if (event.currentTarget.attrs.x <= 0) {
+            //   newXPos = 0;
+            // }
+            // if (event.currentTarget.attrs.x <= 0) {
+            //   newYPos = 0;
+            // }
             updateXYPosition(this.props.objectID, newXPos, newYPos);
             updateRotation(this.props.objectID, newRotation);
           }}
