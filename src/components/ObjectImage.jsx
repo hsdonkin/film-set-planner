@@ -439,6 +439,8 @@ class ObjectImage extends React.Component {
     };
   }
 
+  componentDidMount = () => {};
+
   render() {
     let rotationAngles;
     let zIndex = 0;
@@ -483,6 +485,8 @@ class ObjectImage extends React.Component {
           shadowOpacity={0.3}
           image={loadedImage}
           draggable={this.props.draggable}
+          applyCache
+          applyHitFromCache
           dragBoundFunc={position => {
             const canvas = document.getElementsByClassName(
               "konvajs-content"
@@ -521,7 +525,8 @@ class ObjectImage extends React.Component {
             updateXYPosition(this.props.objectID, newXPos, newYPos);
             updateRotation(this.props.objectID, newRotation);
           }}
-          onClick={() => {
+          onClick={e => {
+            console.log(e);
             this.setState({ selected: !this.state.selected });
           }}
           onDblClick={() => {
