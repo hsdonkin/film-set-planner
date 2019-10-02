@@ -1,6 +1,7 @@
 const persistDataLocally = store => next => action => {
-    localStorage['reduxStore'] = JSON.stringify(store.getState());
-    return next(action);
-  }
-  
-  export default persistDataLocally;
+  localStorage["reduxStore"] = JSON.stringify(store.getState());
+  console.log(localStorage["reduxStore"]);
+  return next(action);
+};
+
+export default persistDataLocally;

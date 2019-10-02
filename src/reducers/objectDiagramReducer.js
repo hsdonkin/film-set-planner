@@ -117,10 +117,8 @@ const objectDiagramReducer = (state = initialState, action) => {
     case "UPDATE_STAGE_XY_POSITION":
       newState = JSON.parse(JSON.stringify(state));
       clearInterval(offsetTimer);
-      newState.stage = {
-        x: action.x,
-        y: action.y
-      };
+      newState.stage.x = action.x;
+      newState.stage.y = action.y;
       return newState;
 
     case "RESET_STAGE_XY_POSITION":

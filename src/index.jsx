@@ -17,6 +17,7 @@ import { createStore, applyMiddleware } from "redux";
 import rootReducer from "./reducers";
 import logger from "redux-logger";
 import persistDataLocally from "./middleware";
+import thunk from "redux-thunk";
 
 let retrievedState;
 try {
@@ -25,6 +26,7 @@ try {
     retrievedState = {};
   }
   retrievedState = JSON.parse(retrievedState);
+  console.log("Retrieved state from redux store", retrievedState);
 } catch (err) {
   retrievedState = {};
 }
@@ -32,7 +34,7 @@ try {
 const store = createStore(
   rootReducer,
   retrievedState,
-  applyMiddleware(logger, persistDataLocally)
+  applyMiddleware(logger, persistDataLocally, thunk)
 );
 
 import App from "./App";
