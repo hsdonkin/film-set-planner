@@ -237,6 +237,8 @@ class Diagram extends React.Component {
                 "value of this.state.scale in setTimeout",
                 this.state.scale
               );
+              // this needs to be here because localStorage is getting wrong value??
+              // has to fire action twice
               updateStageScale(this.state.scale);
               updateStageScale(this.state.scale);
             }, 1000);
