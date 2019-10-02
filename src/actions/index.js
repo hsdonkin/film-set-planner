@@ -25,6 +25,13 @@ export const toggleObjectSelected = objectID => {
   };
 };
 
+export const toggleObjectLocked = objectID => {
+  return {
+    type: "TOGGLE_OBJECT_LOCKED",
+    objectID
+  };
+};
+
 export const updateXYPosition = (objectID, xValue, yValue) => {
   return {
     type: "UPDATE_XY_POSITION",
@@ -65,4 +72,8 @@ export const updateRotation = (objectID, rotation) => {
 
 export const deselectAllObjects = () => {
   return { type: "DESELECT_ALL_OBJECTS" };
+};
+
+export const toggleGrid = () => {
+  return { type: "TOGGLE_GRID" };
 };

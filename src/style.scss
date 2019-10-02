@@ -1,4 +1,5 @@
 canvas {
+  display: inline-block;
   border: 1px whitesmoke solid;
 }
 
@@ -59,8 +60,4 @@ canvas {
 
 .konvajs-content {
   margin: 0;
-}
-
-canvas {
-  display: inline-block;
 }

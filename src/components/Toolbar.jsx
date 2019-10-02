@@ -1,14 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
-import { resetStageXYPosition } from "./../actions";
+import { resetStageXYPosition, toggleGrid } from "./../actions";
 
 const Toolbar = props => {
-  const { resetStageXYPosition } = props;
+  const { resetStageXYPosition, toggleGrid } = props;
   return (
     <div className="toolbar">
       <button
         onClick={() => {
-          resetStageXYPosition();
+          toggleGrid();
         }}
       >
         Toggle Grid
@@ -26,5 +26,5 @@ const Toolbar = props => {
 
 export default connect(
   null,
-  { resetStageXYPosition }
+  { resetStageXYPosition, toggleGrid }
 )(Toolbar);
