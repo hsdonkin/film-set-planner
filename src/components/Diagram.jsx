@@ -40,8 +40,20 @@ class Diagram extends React.Component {
       offsetY: -1600,
       loaded: false
     };
+    console.log("diagram props", this.props);
+    if (this.props.diagram.stage.showGrid === true) {
+      console.log("show grid");
+    }
+    let gridImage = new Image();
+    gridImage.onload = () => {
+      this.setState({
+        ...this.state,
+        loaded: true,
+        gridImage: gridImage
+      });
+    };
 
-    let x = 4;
+    gridImage.src = graphPattern;
   }
 
   handleScaleChange = () => {};
@@ -68,6 +80,8 @@ class Diagram extends React.Component {
   };
 
   render() {
+    console.log(this.props);
+
     console.log("current offset", this.state.offsetX, this.state.offsetY);
     const {
       deselectAllObjects,
@@ -79,37 +93,54 @@ class Diagram extends React.Component {
     // get stage for X Y positions
     const { objects, stage } = this.props.diagram;
 
+    // unlocked objects
     let keys = Object.keys(objects);
     let objectImagesList = [];
     let lockedObjectImagesList = [];
     keys.forEach(key => {
-      refs.push(React.createRef(key));
-      objectImagesList.push(
-        <ObjectImage
-          ref={key}
-          key={key}
-          imgName={objects[key].imgName}
-          objectID={key}
-          x={objects[key].x}
-          y={objects[key].y}
-          rotation={objects[key].rotation}
-          selected={objects[key.selected]}
-          stageDimensions={{
-            width: window.innerWidth,
-            height: window.innerHeight
-          }}
-        />
-      );
+      console.log(objects[key].locked);
+      if (objects[key].locked === false) {
+        refs.push(React.createRef(key));
+        objectImagesList.push(
+          <ObjectImage
+            draggable={true}
+            ref={key}
+            key={key}
+            imgName={objects[key].imgName}
+            objectID={key}
+            x={objects[key].x}
+            y={objects[key].y}
+            rotation={objects[key].rotation}
+            selected={objects[key.selected]}
+            stageDimensions={{
+              width: window.innerWidth,
+              height: window.innerHeight
+            }}
+          />
+        );
+      } else {
+        lockedObjectImagesList.push(
+          <ObjectImage
+            draggable={false}
+            ref={key}
+            key={key}
+            imgName={objects[key].imgName}
+            objectID={key}
+            x={objects[key].x}
+            y={objects[key].y}
+            rotation={objects[key].rotation}
+            selected={objects[key.selected]}
+            stageDimensions={{
+              width: window.innerWidth,
+              height: window.innerHeight
+            }}
+          />
+        );
+      }
     });
 
     // graph paper loading
-    let loadedImage = new Image();
-    if (this.state.loaded === false) {
-      loadedImage.onload = () => {
-        this.setState({ ...this.state, loaded: true });
-      };
-    }
-    loadedImage.src = graphPattern;
+
     // change the texture when scale hits a certain window
     let gridScale = 4;
     if (this.state.scale <= 0.1 && this.state.scale >= 0.06) {
@@ -199,15 +230,19 @@ class Diagram extends React.Component {
               offsetY={4000}
               height={8000}
               width={8000}
-              fillPatternImage={loadedImage}
+              fillPatternImage={this.state.gridImage}
               fillPatternRepeat={"repeat"}
               opacity={0.3}
+              onMouseDown={e => {
+                console.log("mouse down");
+                deselectAllObjects();
+              }}
             />
           </Layer>
+          <Layer key={v4()}>{lockedObjectImagesList}</Layer>
           <Layer key={v4()} draggable>
             <Group>{objectImagesList}</Group>
           </Layer>
-          <Layer key={v4()}>{lockedObjectImagesList}</Layer>
         </Stage>
       </div>
     );

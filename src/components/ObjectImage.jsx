@@ -8,7 +8,8 @@ import {
   toggleObjectSelected,
   deselectAllObjects,
   updateRotation,
-  removeObjectFromDiagram
+  removeObjectFromDiagram,
+  toggleObjectLocked
 } from "./../actions";
 
 // all these requires have to be done here
@@ -447,7 +448,8 @@ class ObjectImage extends React.Component {
       toggleObjectSelected,
       deselectAllObjects,
       updateRotation,
-      removeObjectFromDiagram
+      removeObjectFromDiagram,
+      toggleObjectLocked
     } = this.props;
     let xPos = this.props.x;
     let yPos = this.props.y;
@@ -480,7 +482,7 @@ class ObjectImage extends React.Component {
           shadowBlur={50}
           shadowOpacity={0.3}
           image={loadedImage}
-          draggable
+          draggable={this.props.draggable}
           dragBoundFunc={position => {
             const canvas = document.getElementsByClassName(
               "konvajs-content"
@@ -521,6 +523,9 @@ class ObjectImage extends React.Component {
           }}
           onClick={() => {
             this.setState({ selected: !this.state.selected });
+          }}
+          onDblClick={() => {
+            toggleObjectLocked(this.props.objectID);
           }}
           onContextMenu={() => {
             removeObjectFromDiagram(this.props.objectID);
@@ -572,6 +577,7 @@ export default connect(
     toggleObjectSelected,
     deselectAllObjects,
     updateRotation,
-    removeObjectFromDiagram
+    removeObjectFromDiagram,
+    toggleObjectLocked
   }
 )(ObjectImage);

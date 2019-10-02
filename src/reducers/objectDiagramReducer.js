@@ -7,26 +7,31 @@ const initialState = {
     y: 0,
     offsetX: -2800,
     offsetY: -1800,
-    scale: 0.2
+    scale: 0.2,
+    showGrid: true
   },
   objects: {
     [v4()]: {
       name: "Arri M8",
       selected: false,
+      locked: false,
       imgPath: "./../assets/Arri M8.png",
       imgName: "ArriM8",
       x: 0,
       y: 0,
-      rotation: 0
+      rotation: 0,
+      zIndex: 0
     },
     [v4()]: {
       name: "Arri M8",
       selected: true,
+      locked: false,
       imgPath: "./../assets/Arri M8.png",
       imgName: "ArriM8",
       x: 500,
       y: 500,
-      rotation: 50
+      rotation: 50,
+      zIndex: 0
     }
   }
 };
@@ -53,7 +58,8 @@ const objectDiagramReducer = (state = initialState, action) => {
         selected: false,
         x: -1 * state.stage.x + objectOffset,
         y: -1 * state.stage.y + objectOffset,
-        rotation: 0
+        rotation: 0,
+        zIndex: 0
       };
       clearInterval(offsetTimer);
       objectOffset += 50;
@@ -82,6 +88,13 @@ const objectDiagramReducer = (state = initialState, action) => {
       } else {
         newState.selection = false;
       }
+      return newState;
+    case "TOGGLE_OBJECT_LOCKED":
+      newState = JSON.parse(JSON.stringify(state));
+      // make the true / false value of selected the opposite of previous value
+      newState.objects[action.objectID].locked = !newState.objects[
+        action.objectID
+      ].locked;
       return newState;
     case "DESELECT_ALL_OBJECTS":
       newState = JSON.parse(JSON.stringify(state));
@@ -131,6 +144,10 @@ const objectDiagramReducer = (state = initialState, action) => {
       // using JSON parse here to avoid mutating state
       newState = JSON.parse(JSON.stringify(state));
       newState.objects[action.objectID].rotation = action.rotation;
+      return newState;
+    case "TOGGLE_GRID":
+      newState = JSON.parse(JSON.stringify(state));
+      newState.stage.showGrid = !newState.stage.showGrid;
       return newState;
     default:
       return state;
