@@ -56,6 +56,7 @@ const objectDiagramReducer = (state = initialState, action) => {
         imgPath: action.object.imgPath,
         imgName: action.object.imgName,
         selected: false,
+        locked: false,
         x: -1 * state.stage.x + objectOffset,
         y: -1 * state.stage.y + objectOffset,
         rotation: 0,
