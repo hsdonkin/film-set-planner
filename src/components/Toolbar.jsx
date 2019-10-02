@@ -11,6 +11,13 @@ const Toolbar = props => {
           resetStageXYPosition();
         }}
       >
+        Toggle Grid
+      </button>
+      <button
+        onClick={() => {
+          resetStageXYPosition();
+        }}
+      >
         Reset View
       </button>
     </div>

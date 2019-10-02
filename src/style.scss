@@ -5,12 +5,13 @@ canvas {
 .toolbar {
   display: block;
   height: 3vh;
-  padding-right: 200px;
+  padding-right: 20vw;
 }
 
 .toolbar button {
   float: right;
   margin-bottom: 1rem !important;
+  margin-right: 1rem;
   background-color: steelblue;
   border: none;
   color: white;

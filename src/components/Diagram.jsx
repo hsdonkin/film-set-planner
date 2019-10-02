@@ -40,6 +40,8 @@ class Diagram extends React.Component {
       offsetY: -1600,
       loaded: false
     };
+
+    let x = 4;
   }
 
   handleScaleChange = () => {};
@@ -110,11 +112,13 @@ class Diagram extends React.Component {
     loadedImage.src = graphPattern;
     // change the texture when scale hits a certain window
     let gridScale = 4;
-    if (this.state.scale <= 0.1 && this.state.scale >= 0.05) {
+    if (this.state.scale <= 0.1 && this.state.scale >= 0.06) {
       console.log("updating grid scale");
-      gridScale = 10;
-    } else if (this.state.scale <= 0.05) {
-      gridScale = 30;
+      gridScale = 6.66666;
+    } else if (this.state.scale <= 0.07 && this.state.scale >= 0.02) {
+      gridScale = 20;
+    } else if (this.state.scale <= 0.02) {
+      gridScale = 40;
     }
 
     return (
