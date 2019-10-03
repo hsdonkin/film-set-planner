@@ -4,7 +4,8 @@ import {
   resetStageXYPosition,
   toggleGrid,
   startDownload,
-  finishDownload
+  finishDownload,
+  saveNewDiagram
 } from "./../actions";
 
 const FileSaver = require("file-saver");
@@ -14,7 +15,8 @@ const Toolbar = props => {
     resetStageXYPosition,
     toggleGrid,
     startDownload,
-    finishDownload
+    finishDownload,
+    saveNewDiagram
   } = props;
   let x;
   return (
@@ -43,6 +45,13 @@ const Toolbar = props => {
       </button>
       <button
         onClick={() => {
+          saveNewDiagram(props.diagram.objects);
+        }}
+      >
+        Save
+      </button>
+      <button
+        onClick={() => {
           toggleGrid();
         }}
       >
@@ -59,7 +68,19 @@ const Toolbar = props => {
   );
 };
 
+const mapStateToProps = state => {
+  return {
+    diagram: state.diagram
+  };
+};
+
 export default connect(
-  null,
-  { resetStageXYPosition, toggleGrid, startDownload, finishDownload }
+  mapStateToProps,
+  {
+    resetStageXYPosition,
+    toggleGrid,
+    startDownload,
+    finishDownload,
+    saveNewDiagram
+  }
 )(Toolbar);
