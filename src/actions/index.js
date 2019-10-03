@@ -85,3 +85,12 @@ export const startDownload = () => {
 export const finishDownload = () => {
   return { type: "FINISH_DOWNLOAD" };
 };
+
+// SAVED DIAGRAM ACTIONS
+
+export const saveNewDiagram = objects => {
+  return {
+    type: "SAVE_NEW_DIAGRAM",
+    objects: objects
+  };
+};
