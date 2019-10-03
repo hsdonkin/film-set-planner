@@ -245,6 +245,7 @@ class Diagram extends React.Component {
             }, 1000);
           }}
         >
+          <Layer id={"baseLayer"} />
           <Layer>{gridRectangle}</Layer>
           <Layer key={v4()}>{lockedObjectImagesList}</Layer>
           <Layer key={v4()} draggable>
