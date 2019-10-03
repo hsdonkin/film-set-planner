@@ -34,7 +34,7 @@ try {
 const store = createStore(
   rootReducer,
   retrievedState,
-  applyMiddleware(logger, persistDataLocally, thunk)
+  applyMiddleware(persistDataLocally, logger, thunk)
 );
 
 import App from "./App";

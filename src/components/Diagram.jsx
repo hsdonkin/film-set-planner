@@ -45,6 +45,9 @@ class Diagram extends React.Component {
     if (this.props.diagram.stage.showGrid === true) {
       console.log("show grid");
     }
+  }
+
+  componentDidMount = () => {
     let gridImage = new Image();
     gridImage.onload = () => {
       this.setState({
@@ -55,7 +58,7 @@ class Diagram extends React.Component {
     };
 
     gridImage.src = graphPattern;
-  }
+  };
 
   handleScaleChange = () => {};
 

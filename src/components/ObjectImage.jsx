@@ -441,6 +441,7 @@ class ObjectImage extends React.Component {
   }
 
   componentWillUnmount = () => {
+    // required to stop memory leak from async events updating state after component removed from dom
     clearInterval(this.contextMenuTimer);
     this.loadedImage.onload = null;
   };
@@ -527,7 +528,8 @@ class ObjectImage extends React.Component {
             updateXYPosition(this.props.objectID, newXPos, newYPos);
             updateRotation(this.props.objectID, newRotation);
           }}
-          onClick={() => {
+          onClick={e => {
+            console.log(e);
             this.setState({ selected: !this.state.selected });
           }}
           onDblClick={() => {
@@ -557,6 +559,7 @@ class ObjectImage extends React.Component {
             //   newYPos = 0;
             // }
             updateXYPosition(this.props.objectID, newXPos, newYPos);
+            updateRotation(this.props.objectID, newRotation);
             updateRotation(this.props.objectID, newRotation);
           }}
         />
