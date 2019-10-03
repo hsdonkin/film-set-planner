@@ -2,6 +2,7 @@ import { v4 } from "uuid";
 
 const initialState = {
   selection: true,
+  downloading: false,
   stage: {
     x: 0,
     y: 0,
@@ -142,6 +143,14 @@ const objectDiagramReducer = (state = initialState, action) => {
     case "TOGGLE_GRID":
       newState = JSON.parse(JSON.stringify(state));
       newState.stage.showGrid = !newState.stage.showGrid;
+      return newState;
+    case "START_DOWNLOAD":
+      newState = JSON.parse(JSON.stringify(state));
+      newState.downloading = true;
+      return newState;
+    case "FINISH_DOWNLOAD":
+      newState = JSON.parse(JSON.stringify(state));
+      newState.downloading = false;
       return newState;
     default:
       return state;

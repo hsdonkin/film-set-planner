@@ -77,3 +77,11 @@ export const deselectAllObjects = () => {
 export const toggleGrid = () => {
   return { type: "TOGGLE_GRID" };
 };
+
+export const startDownload = () => {
+  return { type: "START_DOWNLOAD" };
+};
+
+export const finishDownload = () => {
+  return { type: "FINISH_DOWNLOAD" };
+};
