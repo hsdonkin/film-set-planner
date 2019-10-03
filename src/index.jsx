@@ -26,7 +26,6 @@ try {
     retrievedState = {};
   }
   retrievedState = JSON.parse(retrievedState);
-  console.log("Retrieved state from redux store", retrievedState);
 } catch (err) {
   retrievedState = {};
 }

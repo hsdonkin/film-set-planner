@@ -529,7 +529,6 @@ class ObjectImage extends React.Component {
             updateRotation(this.props.objectID, newRotation);
           }}
           onClick={e => {
-            console.log(e);
             this.setState({ selected: !this.state.selected });
           }}
           onDblClick={() => {
