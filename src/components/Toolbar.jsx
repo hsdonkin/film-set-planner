@@ -7,6 +7,8 @@ import {
   finishDownload
 } from "./../actions";
 
+const FileSaver = require("file-saver");
+
 const Toolbar = props => {
   const {
     resetStageXYPosition,
@@ -22,14 +24,18 @@ const Toolbar = props => {
           startDownload();
           const canvases = document.getElementsByTagName("canvas");
           const ctx = canvases[0].getContext("2d");
+          ctx.fillStyle = "white";
+          ctx.fillRect(0, 0, canvases[0].width, canvases[0].height);
           ctx.drawImage(canvases[1], 0, 0);
           ctx.drawImage(canvases[2], 0, 0);
-          const dataUri = canvases[0].toDataURL("image/png");
+          ctx.drawImage(canvases[3], 0, 0);
+          const dataUri = canvases[0].toDataURL("image/jpg");
 
-          let link = document.createElement("a");
-          link.download = "diagram.png";
-          link.href = dataUri;
-          link.click();
+          FileSaver.saveAs(dataUri, "diagram.jpg");
+          // let link = document.createElement("a");
+          // link.download = "diagram.png";
+          // link.href = dataUri;
+          // link.click();
           finishDownload();
         }}
       >

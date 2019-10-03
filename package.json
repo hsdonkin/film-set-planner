@@ -70,6 +70,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.6.0",
+    "file-saver": "^2.0.2",
     "konva": "^4.0.12",
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
