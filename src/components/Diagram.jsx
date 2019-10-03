@@ -19,11 +19,10 @@ import {
   Rect
 } from "react-konva";
 import { useStrictMode } from "react-konva";
+useStrictMode(true);
 
 // graph pattern
 const graphPattern = require("./../assets/four-graph-pattern.png");
-
-useStrictMode(true);
 
 // dynamic image layer
 import ObjectImage from "./ObjectImage";
@@ -39,12 +38,9 @@ class Diagram extends React.Component {
       scale: this.props.diagram.stage.scale,
       offsetX: -2800,
       offsetY: -1600,
-      loaded: false
+      loaded: false,
+      showGrid: true
     };
-    console.log("diagram props", this.props);
-    if (this.props.diagram.stage.showGrid === true) {
-      console.log("show grid");
-    }
   }
 
   componentDidMount = () => {
@@ -65,21 +61,20 @@ class Diagram extends React.Component {
   handleResizeChange = () => {};
 
   shouldComponentUpdate = (nextProps, nextState) => {
-    // need to check how many properties diagram.objects has
-    // this tells us if a new thing was added to the diagram, if not don't update it
-    // disabling this creates performance issues where the diagram flickers
+    console.log("old props", this.props);
+    console.log("Nextprops in should update", nextProps);
 
-    // having issues where this conditional randomly stopped working ???
-
-    // if (
-    //   Object.keys(nextProps.diagram.objects).length ===
-    //   Object.keys(this.props.diagram.objects).length
-    // ) {
-    //   return false;
-    // } else {
-    //   console.log("diagram is updating");
-    //   return true;
-    // }
+    if (
+      nextProps.diagram.stage.showGrid === true &&
+      this.state.showGrid != true
+    ) {
+      this.setState({ ...this.state, showGrid: true });
+    } else if (
+      nextProps.diagram.stage.showGrid === false &&
+      this.state.showGrid != false
+    ) {
+      this.setState({ ...this.state, showGrid: false });
+    }
     return true;
   };
 
@@ -88,10 +83,6 @@ class Diagram extends React.Component {
   };
 
   render() {
-    console.log(this.state);
-    console.log(this.props);
-
-    console.log("current offset", this.state.offsetX, this.state.offsetY);
     const {
       deselectAllObjects,
       updateStageXYPosition,
@@ -107,7 +98,6 @@ class Diagram extends React.Component {
     let objectImagesList = [];
     let lockedObjectImagesList = [];
     keys.forEach(key => {
-      console.log(objects[key].locked);
       if (objects[key].locked === false) {
         refs.push(React.createRef(key));
         objectImagesList.push(
@@ -127,7 +117,6 @@ class Diagram extends React.Component {
             }}
           />
         );
-        console.log("this is objectimageslist", objectImagesList);
       } else {
         lockedObjectImagesList.push(
           <ObjectImage
@@ -149,17 +138,36 @@ class Diagram extends React.Component {
       }
     });
 
-    // graph paper loading
-
     // change the texture when scale hits a certain window
     let gridScale = 4;
     if (this.state.scale <= 0.1 && this.state.scale >= 0.06) {
-      console.log("updating grid scale");
       gridScale = 6.66666;
     } else if (this.state.scale <= 0.07 && this.state.scale >= 0.02) {
       gridScale = 20;
     } else if (this.state.scale <= 0.02) {
       gridScale = 40;
+    }
+    // graph paper conditional
+    let gridRectangle;
+    if (this.state.showGrid === true) {
+      gridRectangle = (
+        <Rect
+          x={0}
+          y={0}
+          scaleX={gridScale}
+          scaleY={gridScale}
+          offsetX={4000}
+          offsetY={4000}
+          height={8000}
+          width={8000}
+          fillPatternImage={this.state.gridImage}
+          fillPatternRepeat={"repeat"}
+          opacity={0.3}
+          onMouseDown={e => {
+            deselectAllObjects();
+          }}
+        />
+      );
     }
 
     return (
@@ -231,37 +239,14 @@ class Diagram extends React.Component {
               // });
               // updateStageScale(this.state.scale + scaleChange * 0.0001);
             }
-            console.log(
-              "value of this.state.scale outside of setTImeout",
-              this.state.scale
-            );
 
             this.scaleTimer = setTimeout(() => {
               updateStageScale(this.state.scale);
               updateStageScale(this.state.scale);
             }, 1000);
-            console.log(this.state);
           }}
         >
-          <Layer>
-            <Rect
-              x={0}
-              y={0}
-              scaleX={gridScale}
-              scaleY={gridScale}
-              offsetX={4000}
-              offsetY={4000}
-              height={8000}
-              width={8000}
-              fillPatternImage={this.state.gridImage}
-              fillPatternRepeat={"repeat"}
-              opacity={0.3}
-              onMouseDown={e => {
-                console.log("mouse down");
-                deselectAllObjects();
-              }}
-            />
-          </Layer>
+          <Layer>{gridRectangle}</Layer>
           <Layer key={v4()}>{lockedObjectImagesList}</Layer>
           <Layer key={v4()} draggable>
             <Group>{objectImagesList}</Group>
@@ -273,9 +258,9 @@ class Diagram extends React.Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state.diagram);
   return {
-    diagram: state.diagram
+    diagram: state.diagram,
+    showGrid: state.diagram.stage.showGrid
   };
 };
 
