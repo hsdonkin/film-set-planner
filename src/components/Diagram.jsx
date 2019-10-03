@@ -61,9 +61,6 @@ class Diagram extends React.Component {
   handleResizeChange = () => {};
 
   shouldComponentUpdate = (nextProps, nextState) => {
-    console.log("old props", this.props);
-    console.log("Nextprops in should update", nextProps);
-
     if (
       nextProps.diagram.stage.showGrid === true &&
       this.state.showGrid != true
@@ -162,6 +159,8 @@ class Diagram extends React.Component {
           width={8000}
           fillPatternImage={this.state.gridImage}
           fillPatternRepeat={"repeat"}
+          fillPatternOffsetX={250}
+          fillPatternOffsetY={100}
           opacity={0.3}
           onMouseDown={e => {
             deselectAllObjects();
