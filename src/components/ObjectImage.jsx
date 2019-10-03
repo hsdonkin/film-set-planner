@@ -432,12 +432,18 @@ class ObjectImage extends React.Component {
     super(props);
     this.KonvaImageRef = React.createRef();
     this.trRef = React.createRef();
+    this.loadedImage;
     this.state = {
       selected: this.props.selected,
       loaded: false,
       loadedImage: null
     };
   }
+
+  componentWillUnmount = () => {
+    clearInterval(this.contextMenuTimer);
+    this.loadedImage.onload = null;
+  };
 
   render() {
     let rotationAngles;
@@ -455,16 +461,16 @@ class ObjectImage extends React.Component {
     let yPos = this.props.y;
     let rotation = this.props.rotation;
 
-    let loadedImage = new Image();
+    this.loadedImage = new Image();
     // need to toggle loaded state so that images make it to the page when loaded
     // this conditional is REALLY important, because otherwise it spams state updates whenever a component is moved
     if (this.state.loaded === false) {
-      loadedImage.onload = () => {
+      this.loadedImage.onload = () => {
         this.setState({ ...this.state, loaded: true });
       };
     }
     // eval so that we can dynamically select images
-    loadedImage.src = eval(this.props.imgName);
+    this.loadedImage.src = eval(this.props.imgName);
 
     if (this.state.selected === true) {
       this.trRef.current.setNode(this.KonvaImageRef.current);
@@ -481,7 +487,7 @@ class ObjectImage extends React.Component {
           shadowOffset={{ x: 0, y: 0 }}
           shadowBlur={50}
           shadowOpacity={0.3}
-          image={loadedImage}
+          image={this.loadedImage}
           draggable={this.props.draggable}
           dragBoundFunc={position => {
             const canvas = document.getElementsByClassName(
@@ -531,7 +537,7 @@ class ObjectImage extends React.Component {
             removeObjectFromDiagram(this.props.objectID);
             // prevent the context menu from opening
             window.oncontextmenu = () => {
-              setTimeout(function() {
+              this.contextMenuTimer = setTimeout(function() {
                 window.oncontextmenu = () => {
                   return true;
                 };
