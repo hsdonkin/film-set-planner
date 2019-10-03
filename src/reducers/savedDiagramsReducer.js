@@ -9,7 +9,7 @@ const savedDiagramsReducer = (state = initialState, action) => {
   switch (action.type) {
     case "SAVE_NEW_DIAGRAM":
       newState = JSON.parse(JSON.stringify(state));
-      newState.diagrams[v4()] = action.objects;
+      newState.diagrams[v4()] = { objects: action.objects };
       return newState;
     default:
       return state;

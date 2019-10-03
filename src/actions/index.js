@@ -94,3 +94,18 @@ export const saveNewDiagram = objects => {
     objects: objects
   };
 };
+
+export const loadDiagram = (diagramID, diagram) => {
+  return {
+    type: "LOAD_DIAGRAM",
+    diagramID,
+    diagram
+  };
+};
+
+export const deleteDiagram = diagramID => {
+  return {
+    type: "DELETE_DIAGRAM",
+    diagramID
+  };
+};

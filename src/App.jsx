@@ -14,6 +14,8 @@ import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 // toolbar
 import Toolbar from "./components/Toolbar";
+// saved diagrams
+import SavedDiagramsList from "./components/SavedDiagramsList";
 
 const App = props => {
   return (
@@ -21,6 +23,7 @@ const App = props => {
       <Toolbar />
       <Sidebar />
       <Diagram />
+      <SavedDiagramsList />
     </div>
   );
 };
