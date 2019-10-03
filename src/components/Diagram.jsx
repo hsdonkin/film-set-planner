@@ -124,6 +124,7 @@ class Diagram extends React.Component {
             }}
           />
         );
+        console.log("this is objectimageslist", objectImagesList);
       } else {
         lockedObjectImagesList.push(
           <ObjectImage
@@ -233,10 +234,6 @@ class Diagram extends React.Component {
             );
 
             this.scaleTimer = setTimeout(() => {
-              console.log(
-                "value of this.state.scale in setTimeout",
-                this.state.scale
-              );
               updateStageScale(this.state.scale);
               updateStageScale(this.state.scale);
             }, 1000);
