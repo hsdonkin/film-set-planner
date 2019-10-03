@@ -39,7 +39,9 @@ class Diagram extends React.Component {
       offsetX: -2800,
       offsetY: -1600,
       loaded: false,
-      showGrid: true
+      showGrid: true,
+      diagramHeight: window.innerHeight * 0.7,
+      diagramWidth: window.innerWidth * 0.7
     };
   }
 
@@ -55,8 +57,6 @@ class Diagram extends React.Component {
 
     gridImage.src = graphPattern;
   };
-
-  handleScaleChange = () => {};
 
   handleResizeChange = () => {};
 
@@ -77,9 +77,31 @@ class Diagram extends React.Component {
 
   componentWillUnmount = () => {
     // clearInterval(this.scaleTimer);
+    clearInterval(this.resizeTimer);
   };
 
   render() {
+    window.onresize = e => {
+      console.log(e);
+      console.log("resizing");
+      clearInterval(this.resizeTimer);
+      this.resizeTimer = setTimeout(() => {
+        if (e.currentTarget.innerWidth <= 1300) {
+          this.setState({
+            ...this.state,
+            diagramHeight: e.currentTarget.innerHeight * 0.7,
+            diagramWidth: e.currentTarget.innerWidth * 0.5
+          });
+        } else {
+          this.setState({
+            ...this.state,
+            diagramHeight: e.currentTarget.innerHeight * 0.7,
+            diagramWidth: e.currentTarget.innerWidth * 0.7
+          });
+        }
+      }, 500);
+    };
+
     const {
       deselectAllObjects,
       updateStageXYPosition,
@@ -181,8 +203,8 @@ class Diagram extends React.Component {
             border: "1px whitesmoke solid",
             display: "inline-block"
           }}
-          width={1000}
-          height={800}
+          width={this.state.diagramWidth}
+          height={this.state.diagramHeight}
           offsetX={this.state.offsetX}
           offsetY={this.state.offsetY}
           draggable
