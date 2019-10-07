@@ -2,6 +2,10 @@ import React from "react";
 import { connect } from "react-redux";
 import { v4 } from "uuid";
 
+// human readable
+var converter = require('number-to-words');
+var titleCase = require('title-case');
+
 // actions
 import { loadDiagram, deleteDiagram } from "./../actions";
 
@@ -14,8 +18,8 @@ const SavedDiagramsList = props => {
     savedDiagramList.push(
       <React.Fragment key={v4()}>
       <h4 key={v4()}>{diagrams[ID].name}</h4>
-      <p>{Object.keys(diagrams[ID]).length} Objects</p>
-      <button className="load"
+      <p>{titleCase(converter.toWords(Object.keys(diagrams[ID].objects).length))} Objects</p>
+      <button name="load" className="load"
         key={v4()}
         onClick={() => {
           console.log("clicked");
@@ -23,16 +27,17 @@ const SavedDiagramsList = props => {
           loadDiagram(ID, diagrams[ID]);
         }}
       >
-        Load
+        {"\u2714"}
       </button>
       <button
+        name="delete"
         className="delete"
         key={v4()}
         onClick={ () => 
           {deleteDiagram(ID)}
         }
       >
-        Delete
+        {"\u2716"}
       </button>
         <hr/>
       </React.Fragment>

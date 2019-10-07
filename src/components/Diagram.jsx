@@ -66,11 +66,13 @@ class Diagram extends React.Component {
       this.state.showGrid != true
     ) {
       this.setState({ ...this.state, showGrid: true });
+      return true
     } else if (
       nextProps.diagram.stage.showGrid === false &&
       this.state.showGrid != false
     ) {
       this.setState({ ...this.state, showGrid: false });
+      return true
     }
     return true;
   };

@@ -23,6 +23,12 @@ class Toolbar extends React.Component {
     console.log(this.state)
   }
 
+  handleFormSubmit = (event) => {
+    console.log("saving new diagram")
+    this.props.saveNewDiagram(this.state.diagramName, this.props.diagram.objects);
+    this.setState({diagramName:""})
+  }
+
   render () {
 
     const {
@@ -58,15 +64,20 @@ class Toolbar extends React.Component {
         >
           Download
         </button>
-        <button
-          onClick={() => {
-            saveNewDiagram(this.state.diagramName, this.props.diagram.objects);
+       
+        <form
+          onSubmit={ (event) => {
+            console.log("Form submitted")
+            event.preventDefault();
+            this.handleFormSubmit(event)
           }}
+          id={"diagram-name-form"}>
+          <button
+          type="submit"
         >
           Save
         </button>
-        <form id={"diagram-name-form"}>
-          <input name={"diagramName"} onChange={ (event) => {this.handleChange(event)}} placeholder={"Name"} required/>
+          <input name={"diagramName"} onChange={ (event) => {this.handleChange(event)}} placeholder={"Diagram Name"} value={this.state.diagramName} required/>
         </form>
         <button
           onClick={() => {

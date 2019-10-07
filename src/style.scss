@@ -48,6 +48,7 @@ canvas {
 
 .toolbar input{
   display: inline-block;
+  font-size: 1rem;
   float:right;
   height: 2rem;
   margin: 0;
@@ -86,6 +87,13 @@ canvas {
   outline: 0;
 }
 
+.sidebar button.delete-all{
+  background-color: crimson;
+}
+
+.sidebar button.delete-all:hover{
+  background-color: lighten(crimson, 10%)
+}
 
 .diagram {
   display:inline-block;
@@ -108,4 +116,31 @@ canvas {
 .saved-diagrams h3{
   display: block;
   margin: 0;
+}
+
+.saved-diagrams h4{
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.saved-diagrams p {
+  color: gray;
+  font-size: 0.8rem;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.saved-diagrams button.load{
+  background-color: green;
+  color:white;
+  border: none;
+  margin-right: 0.5rem;
+  border-radius: 5px;
+}
+
+.saved-diagrams button.delete{
+  background-color: crimson;
+  color:white;
+  border: none;
+  border-radius: 5px;
 }
