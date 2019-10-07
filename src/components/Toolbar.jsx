@@ -8,6 +8,8 @@ import {
   saveNewDiagram
 } from "./../actions";
 
+import {v4} from 'uuid'
+
 const FileSaver = require("file-saver");
 
 class Toolbar extends React.Component {
@@ -52,7 +54,7 @@ class Toolbar extends React.Component {
             ctx.drawImage(canvases[3], 0, 0);
             const dataUri = canvases[0].toDataURL("image/jpg");
   
-            FileSaver.saveAs(dataUri, "diagram.jpg");
+            FileSaver.saveAs(dataUri, `${v4()}.jpg`);
             // let link = document.createElement("a");
             // link.download = "diagram.png";
             // link.href = dataUri;

@@ -61,12 +61,6 @@ class Diagram extends React.Component {
   handleResizeChange = () => {};
 
   shouldComponentUpdate = (nextProps, nextState) => {
-    console.log("nextProps", nextProps)
-    console.log("this.state",this.state)
-    console.log("nextState",nextState)
-
-     
-
     // grid logic
     if (
       nextProps.diagram.stage.showGrid === true &&
