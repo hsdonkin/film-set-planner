@@ -61,6 +61,13 @@ class Diagram extends React.Component {
   handleResizeChange = () => {};
 
   shouldComponentUpdate = (nextProps, nextState) => {
+    console.log("nextProps", nextProps)
+    console.log("this.state",this.state)
+    console.log("nextState",nextState)
+
+     
+
+    // grid logic
     if (
       nextProps.diagram.stage.showGrid === true &&
       this.state.showGrid != true
@@ -75,6 +82,7 @@ class Diagram extends React.Component {
       return true
     }
     return true;
+   
   };
 
   componentWillUnmount = () => {
@@ -222,7 +230,7 @@ class Diagram extends React.Component {
             let newXPos = this.stageRef.current.attrs.x;
             let newYPos = this.stageRef.current.attrs.y;
             updateStageXYPosition(newXPos, newYPos);
-            updateStageScale(stage.scale);
+         
           }}
           onContextMenu={() => {
             window.oncontextmenu = e => {
@@ -250,20 +258,10 @@ class Diagram extends React.Component {
                 ...this.state,
                 scale: this.state.scale + scaleChange * 0.0001
               });
-              // this.setState({
-              //   scale: this.state.scale + scaleChange * 0.0001,
-              //   offsetX:
-              //     this.state.offsetX +
-              //     scaleChange * 0.5 * Math.sign(scaleChange),
-              //   offsetY:
-              //     this.state.offsetY +
-              //     scaleChange * 0.5 * Math.sign(scaleChange)
-              // });
-              // updateStageScale(this.state.scale + scaleChange * 0.0001);
+            
             }
 
             this.scaleTimer = setTimeout(() => {
-              updateStageScale(this.state.scale);
               updateStageScale(this.state.scale);
             }, 1000);
           }}
