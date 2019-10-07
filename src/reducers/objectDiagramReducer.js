@@ -156,6 +156,12 @@ const objectDiagramReducer = (state = initialState, action) => {
       newState = JSON.parse(JSON.stringify(state));
       newState.downloading = false;
       return newState;
+    case "LOAD_DIAGRAM":
+      newState = JSON.parse(JSON.stringify(state));
+     
+      newState.objects = action.diagram.objects;
+      return newState;
+     
     default:
       return state;
   }

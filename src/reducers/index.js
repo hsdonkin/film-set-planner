@@ -1,12 +1,14 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from "redux";
 
 // current proj reducers
-import objectDiagramReducer from './objectDiagramReducer';
-import objectListReducer from './objectListReducer';
+import objectDiagramReducer from "./objectDiagramReducer";
+import objectListReducer from "./objectListReducer";
+import savedDiagramsReducer from "./savedDiagramsReducer";
 
 const rootReducer = combineReducers({
   diagram: objectDiagramReducer,
-  objects: objectListReducer
+  objects: objectListReducer,
+  saved: savedDiagramsReducer
 });
 
 export default rootReducer;

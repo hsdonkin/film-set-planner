@@ -41,7 +41,7 @@ class Diagram extends React.Component {
       loaded: false,
       showGrid: true,
       diagramHeight: window.innerHeight * 0.7,
-      diagramWidth: window.innerWidth * 0.7
+      diagramWidth: window.innerWidth * 0.6
     };
   }
 
@@ -84,22 +84,21 @@ class Diagram extends React.Component {
     window.onresize = e => {
       console.log(e);
       console.log("resizing");
-      clearInterval(this.resizeTimer);
-      this.resizeTimer = setTimeout(() => {
+      
         if (e.currentTarget.innerWidth <= 1300) {
           this.setState({
             ...this.state,
-            diagramHeight: e.currentTarget.innerHeight * 0.7,
+            diagramHeight: e.currentTarget.innerHeight * 0.6,
             diagramWidth: e.currentTarget.innerWidth * 0.5
           });
         } else {
           this.setState({
             ...this.state,
-            diagramHeight: e.currentTarget.innerHeight * 0.7,
-            diagramWidth: e.currentTarget.innerWidth * 0.7
+            diagramHeight: e.currentTarget.innerHeight * 0.8,
+            diagramWidth: e.currentTarget.innerWidth * 0.6
           });
         }
-      }, 500);
+      
     };
 
     const {

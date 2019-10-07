@@ -85,3 +85,28 @@ export const startDownload = () => {
 export const finishDownload = () => {
   return { type: "FINISH_DOWNLOAD" };
 };
+
+// SAVED DIAGRAM ACTIONS
+
+export const saveNewDiagram = (name,objects) => {
+  return {
+    type: "SAVE_NEW_DIAGRAM",
+    name: name,
+    objects: objects
+  };
+};
+
+export const loadDiagram = (diagramID, diagram) => {
+  return {
+    type: "LOAD_DIAGRAM",
+    diagramID,
+    diagram
+  };
+};
+
+export const deleteDiagram = diagramID => {
+  return {
+    type: "DELETE_DIAGRAM",
+    diagramID:diagramID
+  };
+};
