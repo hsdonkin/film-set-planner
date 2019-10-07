@@ -1,3 +1,7 @@
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
 canvas {
   display: inline-block;
   border: 1px whitesmoke solid;
@@ -5,13 +9,19 @@ canvas {
 
 .toolbar {
   display: block;
-  height: 3vh;
-  padding-right: 20vw;
+  height: 4rem;
+  margin-bottom:1rem;
+  padding-right: 18vw
+}
+
+.toolbar h1{
+  display:inline-block;
+  margin: 0;
 }
 
 .toolbar button {
-  float: right;
-  margin-bottom: 1rem !important;
+  float:right;
+  display: inline-block;
   margin-right: 1rem;
   background-color: steelblue;
   border: none;
@@ -21,6 +31,7 @@ canvas {
   text-decoration: none;
   font-size: 1rem;
   border-radius: 0.5rem;
+  clear:left;
 }
 
 .toolbar button:hover {
@@ -30,14 +41,21 @@ canvas {
   outline: 0;
 }
 
+.toolbar form{
+  float:right;
+  display:inline-block;
+}
+
 .toolbar input{
   display: inline-block;
+  font-size: 1rem;
+  float:right;
   height: 2rem;
+  margin: 0;
   margin-right: 1rem;
   outline: none;
   border: none;
   border-bottom: 1px solid lightgray;
-  float:right;
 }
 
 .sidebar {
@@ -45,8 +63,8 @@ canvas {
   display: inline;
   padding-top: 10px;
   margin-right: 30px;
-  height: 80vh;
-  overflow-y: scroll;
+  height: 85vh;
+  overflow-y: auto;
 }
 .sidebar button {
   display: block;
@@ -69,6 +87,13 @@ canvas {
   outline: 0;
 }
 
+.sidebar button.delete-all{
+  background-color: crimson;
+}
+
+.sidebar button.delete-all:hover{
+  background-color: lighten(crimson, 10%)
+}
 
 .diagram {
   display:inline-block;
@@ -79,7 +104,43 @@ canvas {
 }
 
 .saved-diagrams{
-  display:inline;
-  width: 10vw;
-  float:right;
+  overflow:auto;
+  vertical-align: top;
+  display:inline-block;
+  width: 200px;
+  height: (85vh);
+  margin-left: 2rem;
+  top: 0;
+}
+
+.saved-diagrams h3{
+  display: block;
+  margin: 0;
+}
+
+.saved-diagrams h4{
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.saved-diagrams p {
+  color: gray;
+  font-size: 0.8rem;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.saved-diagrams button.load{
+  background-color: green;
+  color:white;
+  border: none;
+  margin-right: 0.5rem;
+  border-radius: 5px;
+}
+
+.saved-diagrams button.delete{
+  background-color: crimson;
+  color:white;
+  border: none;
+  border-radius: 5px;
 }

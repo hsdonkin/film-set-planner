@@ -61,18 +61,28 @@ class Diagram extends React.Component {
   handleResizeChange = () => {};
 
   shouldComponentUpdate = (nextProps, nextState) => {
+    console.log("nextProps", nextProps)
+    console.log("this.state",this.state)
+    console.log("nextState",nextState)
+
+     
+
+    // grid logic
     if (
       nextProps.diagram.stage.showGrid === true &&
       this.state.showGrid != true
     ) {
       this.setState({ ...this.state, showGrid: true });
+      return true
     } else if (
       nextProps.diagram.stage.showGrid === false &&
       this.state.showGrid != false
     ) {
       this.setState({ ...this.state, showGrid: false });
+      return true
     }
     return true;
+   
   };
 
   componentWillUnmount = () => {
@@ -94,7 +104,7 @@ class Diagram extends React.Component {
         } else {
           this.setState({
             ...this.state,
-            diagramHeight: e.currentTarget.innerHeight * 0.8,
+            diagramHeight: e.currentTarget.innerHeight * 0.7,
             diagramWidth: e.currentTarget.innerWidth * 0.6
           });
         }
@@ -220,7 +230,7 @@ class Diagram extends React.Component {
             let newXPos = this.stageRef.current.attrs.x;
             let newYPos = this.stageRef.current.attrs.y;
             updateStageXYPosition(newXPos, newYPos);
-            updateStageScale(stage.scale);
+         
           }}
           onContextMenu={() => {
             window.oncontextmenu = e => {
@@ -248,20 +258,10 @@ class Diagram extends React.Component {
                 ...this.state,
                 scale: this.state.scale + scaleChange * 0.0001
               });
-              // this.setState({
-              //   scale: this.state.scale + scaleChange * 0.0001,
-              //   offsetX:
-              //     this.state.offsetX +
-              //     scaleChange * 0.5 * Math.sign(scaleChange),
-              //   offsetY:
-              //     this.state.offsetY +
-              //     scaleChange * 0.5 * Math.sign(scaleChange)
-              // });
-              // updateStageScale(this.state.scale + scaleChange * 0.0001);
+            
             }
 
             this.scaleTimer = setTimeout(() => {
-              updateStageScale(this.state.scale);
               updateStageScale(this.state.scale);
             }, 1000);
           }}

@@ -33,6 +33,7 @@ const Sidebar = props => {
   return (
     <div className="sidebar">
       <button
+        className="delete-all"
         onClick={() => {
           removeAllFromDiagram();
           resetStageXYPosition();

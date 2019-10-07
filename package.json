@@ -72,6 +72,7 @@
     "@babel/polyfill": "^7.6.0",
     "file-saver": "^2.0.2",
     "konva": "^4.0.12",
+    "number-to-words": "^1.2.4",
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
@@ -81,6 +82,7 @@
     "redux": "^4.0.4",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
+    "title-case": "^2.1.1",
     "use-image": "^1.0.4",
     "uuid": "^3.3.3",
     "whatwg-fetch": "^3.0.0"
