@@ -30,15 +30,16 @@ try {
   retrievedState = {};
 }
 
-
 const store = createStore(
   rootReducer,
   retrievedState,
   applyMiddleware(logger, thunk)
-  );
+);
 
 // write data to localStorage whenever store is changed
-store.subscribe( () => {localStorage["reduxStore"] = JSON.stringify(store.getState())})
+store.subscribe(() => {
+  localStorage["reduxStore"] = JSON.stringify(store.getState());
+});
 
 import App from "./App";
 

@@ -67,16 +67,15 @@ class Diagram extends React.Component {
       this.state.showGrid != true
     ) {
       this.setState({ ...this.state, showGrid: true });
-      return true
+      return true;
     } else if (
       nextProps.diagram.stage.showGrid === false &&
       this.state.showGrid != false
     ) {
       this.setState({ ...this.state, showGrid: false });
-      return true
+      return true;
     }
     return true;
-   
   };
 
   componentWillUnmount = () => {
@@ -88,21 +87,20 @@ class Diagram extends React.Component {
     window.onresize = e => {
       console.log(e);
       console.log("resizing");
-      
-        if (e.currentTarget.innerWidth <= 1300) {
-          this.setState({
-            ...this.state,
-            diagramHeight: e.currentTarget.innerHeight * 0.6,
-            diagramWidth: e.currentTarget.innerWidth * 0.5
-          });
-        } else {
-          this.setState({
-            ...this.state,
-            diagramHeight: e.currentTarget.innerHeight * 0.7,
-            diagramWidth: e.currentTarget.innerWidth * 0.6
-          });
-        }
-      
+
+      if (e.currentTarget.innerWidth <= 1300) {
+        this.setState({
+          ...this.state,
+          diagramHeight: e.currentTarget.innerHeight * 0.6,
+          diagramWidth: e.currentTarget.innerWidth * 0.5
+        });
+      } else {
+        this.setState({
+          ...this.state,
+          diagramHeight: e.currentTarget.innerHeight * 0.7,
+          diagramWidth: e.currentTarget.innerWidth * 0.6
+        });
+      }
     };
 
     const {
@@ -224,7 +222,6 @@ class Diagram extends React.Component {
             let newXPos = this.stageRef.current.attrs.x;
             let newYPos = this.stageRef.current.attrs.y;
             updateStageXYPosition(newXPos, newYPos);
-         
           }}
           onContextMenu={() => {
             window.oncontextmenu = e => {
@@ -252,7 +249,6 @@ class Diagram extends React.Component {
                 ...this.state,
                 scale: this.state.scale + scaleChange * 0.0001
               });
-            
             }
 
             this.scaleTimer = setTimeout(() => {
@@ -273,9 +269,10 @@ class Diagram extends React.Component {
 }
 
 const mapStateToProps = state => {
+  console.log(state);
   return {
-    diagram: state.diagram,
-    showGrid: state.diagram.stage.showGrid
+    diagram: state.diagram.present,
+    showGrid: state.diagram.present.stage.showGrid
   };
 };
 
