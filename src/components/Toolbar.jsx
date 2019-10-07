@@ -20,11 +20,9 @@ class Toolbar extends React.Component {
 
   handleChange = (event) => {
     this.setState({ [event.target['name']]: event.target.value})
-    console.log(this.state)
   }
 
   handleFormSubmit = (event) => {
-    console.log("saving new diagram")
     this.props.saveNewDiagram(this.state.diagramName, this.props.diagram.objects);
     this.setState({diagramName:""})
   }
@@ -67,7 +65,6 @@ class Toolbar extends React.Component {
        
         <form
           onSubmit={ (event) => {
-            console.log("Form submitted")
             event.preventDefault();
             this.handleFormSubmit(event)
           }}
