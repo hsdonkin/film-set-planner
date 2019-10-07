@@ -41,7 +41,8 @@ class Toolbar extends React.Component {
       startDownload,
       finishDownload,
       saveNewDiagram,
-      undo
+      undo,
+      redo
     } = this.props;
     let x;
     return (
@@ -96,6 +97,13 @@ class Toolbar extends React.Component {
         </form>
         <button
           onClick={() => {
+            redo();
+          }}
+        >
+          Redo
+        </button>
+        <button
+          onClick={() => {
             undo();
           }}
         >
@@ -136,6 +144,7 @@ export default connect(
     startDownload,
     finishDownload,
     saveNewDiagram,
-    undo: () => ActionCreators.undo()
+    undo: () => ActionCreators.undo(),
+    redo: () => ActionCreators.redo()
   }
 )(Toolbar);
