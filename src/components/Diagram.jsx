@@ -95,7 +95,7 @@ class Diagram extends React.Component {
           this.setState({
             ...this.state,
             diagramHeight: e.currentTarget.innerHeight * 0.8,
-            diagramWidth: e.currentTarget.innerWidth * 0.7
+            diagramWidth: e.currentTarget.innerWidth * 0.6
           });
         }
       

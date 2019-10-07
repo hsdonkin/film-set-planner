@@ -20,6 +20,9 @@ import SavedDiagramsList from "./components/SavedDiagramsList";
 const App = props => {
   return (
     <div className="page-wrap">
+    <div className="header" >
+    <h1>Film Set Planner</h1>
+    </div>
       <Toolbar />
       <Sidebar />
       <Diagram />

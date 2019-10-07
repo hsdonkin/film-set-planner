@@ -73,11 +73,13 @@ canvas {
 .diagram {
   display:inline-block;
 }
+
 .konvajs-content {
   margin: 0;
 }
 
 .saved-diagrams{
   display:inline;
+  width: 10vw;
   float:right;
 }
