@@ -18,6 +18,7 @@ import rootReducer from "./reducers";
 import logger from "redux-logger";
 import persistDataLocally from "./middleware";
 import thunk from "redux-thunk";
+import { ActionCreators } from "redux-undo";
 
 let retrievedState;
 try {
@@ -39,6 +40,13 @@ const store = createStore(
 // write data to localStorage whenever store is changed
 store.subscribe(() => {
   localStorage["reduxStore"] = JSON.stringify(store.getState());
+});
+
+// redux undo
+window.addEventListener("keypress", event => {
+  if (event.key === "z" && event.ctrlKey === true) {
+    store.dispatch(ActionCreators.undo());
+  }
 });
 
 import App from "./App";

@@ -525,8 +525,13 @@ class ObjectImage extends React.Component {
             let newXPos = event.currentTarget.attrs.x;
             let newYPos = event.currentTarget.attrs.y;
             const newRotation = event.currentTarget.attrs.rotation;
-            updateXYPosition(this.props.objectID, newXPos, newYPos);
-            updateRotation(this.props.objectID, newRotation);
+            updateXYPosition(
+              this.props.objectID,
+              newXPos,
+              newYPos,
+              newRotation
+            );
+            // updateRotation(this.props.objectID, newRotation);
           }}
           onClick={e => {
             this.setState({ selected: !this.state.selected });
@@ -557,9 +562,13 @@ class ObjectImage extends React.Component {
             // if (event.currentTarget.attrs.x <= 0) {
             //   newYPos = 0;
             // }
-            updateXYPosition(this.props.objectID, newXPos, newYPos);
-            updateRotation(this.props.objectID, newRotation);
-            updateRotation(this.props.objectID, newRotation);
+            updateXYPosition(
+              this.props.objectID,
+              newXPos,
+              newYPos,
+              newRotation
+            );
+            // updateRotation(this.props.objectID, newRotation);
           }}
         />
         <Transformer

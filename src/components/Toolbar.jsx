@@ -115,7 +115,7 @@ class Toolbar extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    diagram: state.diagram
+    diagram: state.diagram.present
   };
 };
 

@@ -111,6 +111,7 @@ const objectDiagramReducer = (state = initialState, action) => {
       newState = JSON.parse(JSON.stringify(state));
       newState.objects[action.objectID].x = action.x;
       newState.objects[action.objectID].y = action.y;
+      newState.objects[action.objectID].rotation = action.rotation;
       return newState;
 
     case "UPDATE_STAGE_XY_POSITION":
@@ -158,10 +159,10 @@ const objectDiagramReducer = (state = initialState, action) => {
       return newState;
     case "LOAD_DIAGRAM":
       newState = JSON.parse(JSON.stringify(state));
-     
+
       newState.objects = action.diagram.objects;
       return newState;
-     
+
     default:
       return state;
   }

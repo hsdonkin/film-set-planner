@@ -7,6 +7,7 @@ import {
   resetStageXYPosition,
   updateStageScale
 } from "./../actions";
+import { ActionCreators } from "redux-undo";
 // v4
 import { v4 } from "uuid";
 // konva
@@ -106,7 +107,8 @@ class Diagram extends React.Component {
     const {
       deselectAllObjects,
       updateStageXYPosition,
-      updateStageScale
+      updateStageScale,
+      ActionCreators
     } = this.props;
     const refs = [];
     // extract objects from the redux store diagram
@@ -282,6 +284,7 @@ export default connect(
     deselectAllObjects,
     updateStageXYPosition,
     resetStageXYPosition,
-    updateStageScale
+    updateStageScale,
+    ActionCreators
   }
 )(Diagram);
