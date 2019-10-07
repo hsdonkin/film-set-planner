@@ -63,7 +63,7 @@ canvas {
   padding-top: 10px;
   margin-right: 30px;
   height: 80vh;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 .sidebar button {
   display: block;
@@ -96,7 +96,16 @@ canvas {
 }
 
 .saved-diagrams{
-  display:inline;
-  width: 10vw;
-  float:right;
+  overflow:auto;
+  vertical-align: top;
+  display:inline-block;
+  width: 200px;
+  height: 80vh;
+  margin-left: 2rem;
+  top: 0;
+}
+
+.saved-diagrams h3{
+  display: block;
+  margin: 0;
 }

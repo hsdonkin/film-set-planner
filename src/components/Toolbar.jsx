@@ -66,7 +66,7 @@ class Toolbar extends React.Component {
           Save
         </button>
         <form id={"diagram-name-form"}>
-          <input name={"diagramName"} onChange={ (event) => {this.handleChange(event)}} placeholder={"Name"}/>
+          <input name={"diagramName"} onChange={ (event) => {this.handleChange(event)}} placeholder={"Name"} required/>
         </form>
         <button
           onClick={() => {

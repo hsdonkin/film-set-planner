@@ -9,12 +9,13 @@ const SavedDiagramsList = props => {
   const { diagrams } = props;
   const { loadDiagram, deleteDiagram } = props;
   const diagramIDs = Object.keys(diagrams);
-  const savedDiagramList = [];
+  let savedDiagramList = [];
   diagramIDs.forEach(ID => {
     savedDiagramList.push(
       <React.Fragment key={v4()}>
-      <h3 key={v4()}>{diagrams[ID].name}</h3>
-      <button
+      <h4 key={v4()}>{diagrams[ID].name}</h4>
+      <p>{Object.keys(diagrams[ID]).length} Objects</p>
+      <button className="load"
         key={v4()}
         onClick={() => {
           console.log("clicked");
@@ -25,6 +26,7 @@ const SavedDiagramsList = props => {
         Load
       </button>
       <button
+        className="delete"
         key={v4()}
         onClick={ () => 
           {deleteDiagram(ID)}
@@ -36,9 +38,15 @@ const SavedDiagramsList = props => {
       </React.Fragment>
     );
   });
+  if (savedDiagramList.length === 0){
+    savedDiagramList = (
+      <h4>Click "Save" to save a diagram!</h4>
+    )
+  }
   return <div className="saved-diagrams">
   <React.Fragment>
   <h3>Diagrams:</h3>
+  <hr/>
   {savedDiagramList}
   </React.Fragment>
   </div>;
