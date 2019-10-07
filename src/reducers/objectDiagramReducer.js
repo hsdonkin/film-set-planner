@@ -124,11 +124,11 @@ const objectDiagramReducer = (state = initialState, action) => {
       newState = JSON.parse(JSON.stringify(state));
       clearInterval(offsetTimer);
       newState.stage = {
-        x: 0,
-        y: 0,
+        x: 299,
+        y: 276,
         offsetX: -2800,
         offsetY: -1800,
-        scale: 0.2,
+        scale: 0.09696154785156251,
         showGrid: state.stage.showGrid
       };
       return newState;

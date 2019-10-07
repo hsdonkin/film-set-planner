@@ -35,6 +35,7 @@ class Toolbar extends React.Component {
     let x;
     return (
       <div className="toolbar">
+      <h1>Film Set Planner</h1>
         <button
           onClick={() => {
             startDownload();

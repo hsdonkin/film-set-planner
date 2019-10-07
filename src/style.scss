@@ -1,3 +1,7 @@
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
 canvas {
   display: inline-block;
   border: 1px whitesmoke solid;
@@ -5,13 +9,19 @@ canvas {
 
 .toolbar {
   display: block;
-  height: 3vh;
-  padding-right: 20vw;
+  height: 4rem;
+  margin-bottom:1rem;
+  padding-right: 18vw
+}
+
+.toolbar h1{
+  display:inline-block;
+  margin: 0;
 }
 
 .toolbar button {
-  float: right;
-  margin-bottom: 1rem !important;
+  float:right;
+  display: inline-block;
   margin-right: 1rem;
   background-color: steelblue;
   border: none;
@@ -21,6 +31,7 @@ canvas {
   text-decoration: none;
   font-size: 1rem;
   border-radius: 0.5rem;
+  clear:left;
 }
 
 .toolbar button:hover {
@@ -30,14 +41,20 @@ canvas {
   outline: 0;
 }
 
+.toolbar form{
+  float:right;
+  display:inline-block;
+}
+
 .toolbar input{
   display: inline-block;
+  float:right;
   height: 2rem;
+  margin: 0;
   margin-right: 1rem;
   outline: none;
   border: none;
   border-bottom: 1px solid lightgray;
-  float:right;
 }
 
 .sidebar {
