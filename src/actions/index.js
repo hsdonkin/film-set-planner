@@ -88,9 +88,10 @@ export const finishDownload = () => {
 
 // SAVED DIAGRAM ACTIONS
 
-export const saveNewDiagram = objects => {
+export const saveNewDiagram = (name,objects) => {
   return {
     type: "SAVE_NEW_DIAGRAM",
+    name: name,
     objects: objects
   };
 };
@@ -106,6 +107,6 @@ export const loadDiagram = (diagramID, diagram) => {
 export const deleteDiagram = diagramID => {
   return {
     type: "DELETE_DIAGRAM",
-    diagramID
+    diagramID:diagramID
   };
 };

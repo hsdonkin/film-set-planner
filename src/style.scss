@@ -30,10 +30,21 @@ canvas {
   outline: 0;
 }
 
+.toolbar input{
+  display: inline-block;
+  height: 2rem;
+  margin-right: 1rem;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid lightgray;
+  float:right;
+}
+
 .sidebar {
   float: left;
   display: inline;
   padding-top: 10px;
+  margin-right: 30px;
   height: 80vh;
   overflow-y: scroll;
 }
@@ -58,6 +69,15 @@ canvas {
   outline: 0;
 }
 
+
+.diagram {
+  display:inline-block;
+}
 .konvajs-content {
   margin: 0;
+}
+
+.saved-diagrams{
+  display:inline;
+  float:right;
 }

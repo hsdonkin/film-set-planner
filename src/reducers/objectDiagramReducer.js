@@ -158,10 +158,10 @@ const objectDiagramReducer = (state = initialState, action) => {
       return newState;
     case "LOAD_DIAGRAM":
       newState = JSON.parse(JSON.stringify(state));
-      console.log(action);
-      console.log("newState in LOAD DIAGRAM", newState);
+     
       newState.objects = action.diagram.objects;
       return newState;
+     
     default:
       return state;
   }
