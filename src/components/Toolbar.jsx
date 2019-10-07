@@ -8,6 +8,7 @@ import {
   finishDownload,
   saveNewDiagram
 } from "./../actions";
+import { ActionCreators } from "redux-undo";
 
 import { v4 } from "uuid";
 
@@ -39,7 +40,8 @@ class Toolbar extends React.Component {
       toggleGrid,
       startDownload,
       finishDownload,
-      saveNewDiagram
+      saveNewDiagram,
+      undo
     } = this.props;
     let x;
     return (
@@ -93,6 +95,13 @@ class Toolbar extends React.Component {
           />
         </form>
         <button
+          onClick={() => {
+            undo();
+          }}
+        >
+          Undo
+        </button>
+        <button
           id="toggle-grid"
           onClick={() => {
             toggleGrid();
@@ -126,6 +135,7 @@ export default connect(
     toggleGrid,
     startDownload,
     finishDownload,
-    saveNewDiagram
+    saveNewDiagram,
+    undo: () => ActionCreators.undo()
   }
 )(Toolbar);
