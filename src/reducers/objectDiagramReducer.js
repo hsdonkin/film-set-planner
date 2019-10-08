@@ -161,6 +161,8 @@ const objectDiagramReducer = (state = initialState, action) => {
       newState = JSON.parse(JSON.stringify(state));
 
       newState.objects = action.diagram.objects;
+      newState.name = action.diagram.name;
+      newState.description = action.diagram.description;
       return newState;
 
     default:
