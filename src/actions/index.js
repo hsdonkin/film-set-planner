@@ -89,10 +89,11 @@ export const finishDownload = () => {
 
 // SAVED DIAGRAM ACTIONS
 
-export const saveNewDiagram = (name, objects) => {
+export const saveNewDiagram = (name, description, objects) => {
   return {
     type: "SAVE_NEW_DIAGRAM",
     name: name,
+    description: description,
     objects: objects
   };
 };

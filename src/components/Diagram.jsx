@@ -86,20 +86,39 @@ class Diagram extends React.Component {
 
   render() {
     window.onresize = e => {
-      console.log(e);
+      console.log(e.currentTarget.innerWidth);
       console.log("resizing");
 
-      if (e.currentTarget.innerWidth <= 1300) {
+      if (e.currentTarget.innerWidth < 1300) {
         this.setState({
           ...this.state,
           diagramHeight: e.currentTarget.innerHeight * 0.6,
           diagramWidth: e.currentTarget.innerWidth * 0.5
         });
+      } else if (
+        e.currentTarget.innerWidth >= 1300 &&
+        e.currentTarget.innerWidth < 1400
+      ) {
+        console.log("1300+++");
+        this.setState({
+          ...this.state,
+          diagramHeight: e.currentTarget.innerHeight * 0.6,
+          diagramWidth: e.currentTarget.innerWidth * 0.55
+        });
+      } else if (
+        e.currentTarget.innerWidth >= 1400 &&
+        e.currentTarget.innerWidth < 1650
+      ) {
+        this.setState({
+          ...this.state,
+          diagramHeight: e.currentTarget.innerHeight * 0.6,
+          diagramWidth: e.currentTarget.innerWidth * 0.6
+        });
       } else {
         this.setState({
           ...this.state,
-          diagramHeight: e.currentTarget.innerHeight * 0.7,
-          diagramWidth: e.currentTarget.innerWidth * 0.6
+          diagramHeight: e.currentTarget.innerHeight * 0.6,
+          diagramWidth: e.currentTarget.innerWidth * 0.65
         });
       }
     };
@@ -195,7 +214,7 @@ class Diagram extends React.Component {
     }
 
     return (
-      <div className="diagram">
+      <React.Fragment>
         <Stage
           ref={this.stageRef}
           x={stage.x}
@@ -266,7 +285,7 @@ class Diagram extends React.Component {
             <Group>{objectImagesList}</Group>
           </Layer>
         </Stage>
-      </div>
+      </React.Fragment>
     );
   }
 }

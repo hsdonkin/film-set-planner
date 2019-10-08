@@ -7,6 +7,10 @@ canvas {
   border: 1px whitesmoke solid;
 }
 
+button:focus {
+  outline: none;
+}
+
 .toolbar {
   display: block;
   height: 4rem;
@@ -108,8 +112,10 @@ canvas {
   background-color: lighten(crimson, 10%);
 }
 
-.diagram {
+.diagram-toolbox-wrapper {
   display: inline-block;
+  border: 1px red solid;
+  height: 85vh;
 }
 
 .konvajs-content {
@@ -153,9 +159,71 @@ canvas {
   border-radius: 5px;
 }
 
+.saved-diagrams button.load:focus {
+  outline: none;
+}
+
 .saved-diagrams button.delete {
   background-color: crimson;
   color: white;
   border: none;
   border-radius: 5px;
+}
+
+.saved-diagrams button.delete:focus {
+  outline: none;
+}
+
+.toolbox {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.toolbox h3 {
+  margin: 0;
+}
+
+.toolbox p {
+  display: inline-block;
+  margin: 0;
+}
+
+.diagram-name-description {
+  box-sizing: border-box;
+  border: 1px solid blue;
+  display: inline-block;
+  width: 50%;
+  height: 100%;
+}
+
+.diagram-name-description input {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  margin: 0;
+  border: 0;
+  overflow: auto;
+}
+
+.diagram-name-description input:focus {
+  outline: none;
+}
+
+.diagram-name-description textarea {
+  box-sizing: border-box;
+  width: 100%;
+  border: 0;
+  margin: 0;
+  resize: none;
+}
+.diagram-name-description textarea:focus {
+  outline: none;
+}
+
+.diagram-buttons {
+  vertical-align: top;
+  box-sizing: border-box;
+  display: inline-block;
+  border: 1px solid orange;
+  width: 50%;
 }
