@@ -20,14 +20,21 @@ const Sidebar = props => {
   });
   let buttonList = objectsList.map(object => {
     return (
-      <button
-        onClick={() => {
-          addObjectToDiagram(object);
-        }}
-        key={v4()}
-      >
-        Add {object.name}
-      </button>
+      <div key={v4()}>
+        <h4>{object.name}</h4>
+        <button
+          className="add-button"
+          onClick={() => {
+            addObjectToDiagram(object);
+          }}
+          onMouseEnter={() => {
+            console.log("hovering");
+          }}
+          key={v4()}
+        >
+          {"\u271B"} Add
+        </button>
+      </div>
     );
   });
   return (

@@ -78,9 +78,6 @@ class Toolbar extends React.Component {
           }}
           id={"diagram-name-form"}
         >
-          <button type="button" onClick={() => {}}>
-            FakeSave
-          </button>
           <button id="save-button" type="submit">
             Save
           </button>
