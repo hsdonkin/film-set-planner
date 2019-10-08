@@ -204,7 +204,8 @@ class Diagram extends React.Component {
           scaleY={this.state.scale}
           style={{
             border: "1px whitesmoke solid",
-            display: "inline-block"
+            display: "block",
+            margin: "auto"
           }}
           width={this.state.diagramWidth}
           height={this.state.diagramHeight}
