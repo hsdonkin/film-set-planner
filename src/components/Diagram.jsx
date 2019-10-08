@@ -195,7 +195,7 @@ class Diagram extends React.Component {
     }
 
     return (
-      <div className="diagram">
+      <React.Fragment>
         <Stage
           ref={this.stageRef}
           x={stage.x}
@@ -266,7 +266,7 @@ class Diagram extends React.Component {
             <Group>{objectImagesList}</Group>
           </Layer>
         </Stage>
-      </div>
+      </React.Fragment>
     );
   }
 }

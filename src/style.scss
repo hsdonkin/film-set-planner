@@ -108,8 +108,10 @@ canvas {
   background-color: lighten(crimson, 10%);
 }
 
-.diagram {
+.diagram-toolbox-wrapper {
   display: inline-block;
+  border: 1px red solid;
+  height: 85vh;
 }
 
 .konvajs-content {

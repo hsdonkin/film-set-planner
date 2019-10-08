@@ -14,17 +14,21 @@ import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 // toolbar
 import Toolbar from "./components/Toolbar";
+// toolbox
+import Toolbox from "./components/Toolbox";
 // saved diagrams
 import SavedDiagramsList from "./components/SavedDiagramsList";
 
 const App = props => {
   return (
     <div className="page-wrap">
-    <div className="header" >
-    </div>
+      <div className="header"></div>
       <Toolbar />
       <Sidebar />
-      <Diagram />
+      <div className="diagram-toolbox-wrapper">
+        <Diagram />
+        <Toolbox />
+      </div>
       <SavedDiagramsList />
     </div>
   );
