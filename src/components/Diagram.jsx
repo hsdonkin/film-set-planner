@@ -42,7 +42,7 @@ class Diagram extends React.Component {
       loaded: false,
       showGrid: true,
       diagramHeight: window.innerHeight * 0.7,
-      diagramWidth: window.innerWidth * 0.6
+      diagramWidth: window.innerWidth * 0.5
     };
   }
 
@@ -57,7 +57,46 @@ class Diagram extends React.Component {
     };
 
     gridImage.src = graphPattern;
-  };
+
+    // set diagramHeight and Width to initial values based on window size on load
+
+    if (
+      window.innerWidth < 1300 &&
+      this.state.diagramWidth != window.innerWidth * 0.5
+    ) {
+      this.setState({
+        ...this.state,
+        diagramHeight: window.innerHeight * 0.6,
+        diagramWidth: window.innerWidth * 0.5
+      });
+    } else if (
+      window.innerWidth >= 1300 &&
+      window.innerWidth < 1450 &&
+      this.state.diagramWidth != window.innerWidth * 0.55
+    ) {
+      this.setState({
+        ...this.state,
+        diagramHeight: window.innerHeight * 0.6,
+        diagramWidth: window.innerWidth * 0.55
+      });
+    } else if (
+      window.innerWidth >= 1450 &&
+      window.innerWidth < 1650 &&
+      this.state.diagramWidth != window.innerWidth * 0.6
+    ) {
+      this.setState({
+        ...this.state,
+        diagramHeight: window.innerHeight * 0.6,
+        diagramWidth: window.innerWidth * 0.6
+      });
+    } else {
+      this.setState({
+        ...this.state,
+        diagramHeight: window.innerHeight * 0.6,
+        diagramWidth: window.innerWidth * 0.65
+      });
+    }
+  }; // componentDidMount
 
   handleResizeChange = () => {};
 
