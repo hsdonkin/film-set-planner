@@ -10,6 +10,8 @@ canvas {
 .toolbar {
   display: block;
   height: 4rem;
+  margin-top: 1rem;
+  margin-left: 1rem;
   margin-bottom: 1rem;
   padding-right: 18vw;
 }
@@ -58,6 +60,16 @@ canvas {
   border-bottom: 1px solid lightgray;
 }
 
+.sidebar {
+  float: left;
+  display: inline;
+  padding-top: 10px;
+  margin-right: 1rem;
+  margin-left: 1rem;
+  height: 85vh;
+  overflow-y: auto;
+}
+
 .sidebar h4 {
   margin: 0;
   font-size: 0.9rem;
@@ -65,14 +77,6 @@ canvas {
   margin-right: 1rem;
 }
 
-.sidebar {
-  float: left;
-  display: inline;
-  padding-top: 10px;
-  margin-right: 30px;
-  height: 85vh;
-  overflow-y: auto;
-}
 .add-button {
   background-color: green;
   color: white;
@@ -114,11 +118,13 @@ canvas {
 
 .saved-diagrams {
   overflow: auto;
+  float: right;
   vertical-align: top;
   display: inline-block;
   width: 200px;
-  height: (85vh);
-  margin-left: 2rem;
+  height: 85vh;
+  margin-left: 1rem;
+  margin-right: 1rem;
   top: 0;
 }
 
