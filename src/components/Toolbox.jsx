@@ -37,6 +37,7 @@ class Toolbox extends React.Component {
   handleFormSubmit = event => {
     this.props.saveNewDiagram(
       this.state.diagramName,
+      this.state.diagramDesc,
       this.props.diagram.objects
     );
     this.setState({ diagramName: "", diagramDesc: "" });

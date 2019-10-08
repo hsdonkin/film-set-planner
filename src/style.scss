@@ -7,6 +7,10 @@ canvas {
   border: 1px whitesmoke solid;
 }
 
+button:focus {
+  outline: none;
+}
+
 .toolbar {
   display: block;
   height: 4rem;
@@ -155,11 +159,19 @@ canvas {
   border-radius: 5px;
 }
 
+.saved-diagrams button.load:focus {
+  outline: none;
+}
+
 .saved-diagrams button.delete {
   background-color: crimson;
   color: white;
   border: none;
   border-radius: 5px;
+}
+
+.saved-diagrams button.delete:focus {
+  outline: none;
 }
 
 .toolbox {
