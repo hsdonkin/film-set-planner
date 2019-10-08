@@ -32,12 +32,13 @@ export const toggleObjectLocked = objectID => {
   };
 };
 
-export const updateXYPosition = (objectID, xValue, yValue) => {
+export const updateXYPosition = (objectID, xValue, yValue, rotation) => {
   return {
     type: "UPDATE_XY_POSITION",
     objectID: objectID,
     x: xValue,
-    y: yValue
+    y: yValue,
+    rotation: rotation
   };
 };
 
@@ -88,7 +89,7 @@ export const finishDownload = () => {
 
 // SAVED DIAGRAM ACTIONS
 
-export const saveNewDiagram = (name,objects) => {
+export const saveNewDiagram = (name, objects) => {
   return {
     type: "SAVE_NEW_DIAGRAM",
     name: name,
@@ -107,6 +108,6 @@ export const loadDiagram = (diagramID, diagram) => {
 export const deleteDiagram = diagramID => {
   return {
     type: "DELETE_DIAGRAM",
-    diagramID:diagramID
+    diagramID: diagramID
   };
 };
