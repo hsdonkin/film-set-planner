@@ -97,7 +97,7 @@ class Diagram extends React.Component {
         });
       } else if (
         e.currentTarget.innerWidth >= 1300 &&
-        e.currentTarget.innerWidth < 1400
+        e.currentTarget.innerWidth < 1450
       ) {
         console.log("1300+++");
         this.setState({
@@ -106,7 +106,7 @@ class Diagram extends React.Component {
           diagramWidth: e.currentTarget.innerWidth * 0.55
         });
       } else if (
-        e.currentTarget.innerWidth >= 1400 &&
+        e.currentTarget.innerWidth >= 1450 &&
         e.currentTarget.innerWidth < 1650
       ) {
         this.setState({
