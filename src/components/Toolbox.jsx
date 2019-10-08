@@ -22,10 +22,30 @@ class Toolbox extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      diagramName: "",
+      diagramName: this.props.diagram.name,
       diagramDesc: ""
     };
   }
+
+  shouldComponentUpdate = (nextProps, nextState) => {
+    if (
+      this.state.diagramName != nextState.diagramName ||
+      this.state.diagramDesc != nextState.diagramDesc
+    ) {
+      return true;
+    } else if (this.props.diagram.name != nextProps.diagram.name) {
+      console.log(this.props.diagram.name);
+      console.log(nextProps.diagram.name);
+      this.setState({
+        ...this.state,
+        diagramName: nextProps.diagram.name,
+        diagramDesc: nextProps.diagram.description
+      });
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   handleChange = event => {
     this.setState(
@@ -40,7 +60,6 @@ class Toolbox extends React.Component {
       this.state.diagramDesc,
       this.props.diagram.objects
     );
-    this.setState({ diagramName: "", diagramDesc: "" });
   };
 
   render() {
