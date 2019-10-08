@@ -34,8 +34,6 @@ class Toolbox extends React.Component {
     ) {
       return true;
     } else if (this.props.diagram.name != nextProps.diagram.name) {
-      console.log(this.props.diagram.name);
-      console.log(nextProps.diagram.name);
       this.setState({
         ...this.state,
         diagramName: nextProps.diagram.name,
@@ -48,10 +46,7 @@ class Toolbox extends React.Component {
   };
 
   handleChange = event => {
-    this.setState(
-      { [event.target["name"]]: event.target.value },
-      console.log(this.state)
-    );
+    this.setState({ [event.target["name"]]: event.target.value });
   };
 
   handleFormSubmit = event => {

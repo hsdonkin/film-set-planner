@@ -123,9 +123,6 @@ class Diagram extends React.Component {
 
   render() {
     window.onresize = e => {
-      console.log(e.currentTarget.innerWidth);
-      console.log("resizing");
-
       if (e.currentTarget.innerWidth < 1300) {
         this.setState({
           ...this.state,
@@ -136,7 +133,6 @@ class Diagram extends React.Component {
         e.currentTarget.innerWidth >= 1300 &&
         e.currentTarget.innerWidth < 1450
       ) {
-        console.log("1300+++");
         this.setState({
           ...this.state,
           diagramHeight: e.currentTarget.innerHeight * 0.6,
@@ -328,7 +324,6 @@ class Diagram extends React.Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
     diagram: state.diagram.present,
     showGrid: state.diagram.present.stage.showGrid

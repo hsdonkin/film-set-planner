@@ -29,8 +29,6 @@ const SavedDiagramsList = props => {
           className="load"
           key={v4()}
           onClick={() => {
-            console.log("clicked");
-            console.log(diagrams[ID]);
             loadDiagram(ID, diagrams[ID]);
           }}
         >
@@ -65,7 +63,6 @@ const SavedDiagramsList = props => {
 };
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
     diagrams: state.saved.diagrams
   };

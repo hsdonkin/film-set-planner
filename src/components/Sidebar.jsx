@@ -27,9 +27,6 @@ const Sidebar = props => {
           onClick={() => {
             addObjectToDiagram(object);
           }}
-          onMouseEnter={() => {
-            console.log("hovering");
-          }}
           key={v4()}
         >
           {"\u271B"} Add

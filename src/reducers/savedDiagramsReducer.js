@@ -16,16 +16,14 @@ const savedDiagramsReducer = (state = initialState, action) => {
       if (objectIDs.length > 0) {
         objectIDs.forEach(id => {
           if (newState.diagrams[id].name === action.name) {
-            console.log("found a matching name");
             match = true;
             matchID = id;
           } else {
-            console.log("no matches");
             match = false;
           }
         });
       }
-      console.log(match);
+
       if (match === false) {
         newState.diagrams[v4()] = {
           name: action.name,
@@ -42,9 +40,8 @@ const savedDiagramsReducer = (state = initialState, action) => {
       return newState;
 
     case "DELETE_DIAGRAM":
-      console.log("in SavedDIagramsReducer");
       newState = JSON.parse(JSON.stringify(state));
-      console.log("newState in savedDiagramsReducer", newState);
+
       delete newState.diagrams[action.diagramID];
       return newState;
     default:
