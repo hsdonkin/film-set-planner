@@ -27,6 +27,8 @@ class Toolbox extends React.Component {
     };
   }
 
+  componentDidMount = () => {};
+
   shouldComponentUpdate = (nextProps, nextState) => {
     if (
       this.state.diagramName != nextState.diagramName ||
@@ -67,6 +69,7 @@ class Toolbox extends React.Component {
       undo,
       redo
     } = this.props;
+
     return (
       <div className="toolbox">
         <div className="diagram-name-description">
@@ -103,7 +106,7 @@ class Toolbox extends React.Component {
             </button>
           </form>
         </div>
-        <div className="diagram-buttons">
+        <div className="diagram-button-wrapper">
           <button
             onClick={() => {
               startDownload();
