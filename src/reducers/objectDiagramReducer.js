@@ -58,8 +58,7 @@ const objectDiagramReducer = (state = initialState, action) => {
         locked: false,
         x: -1 * state.stage.x + objectOffset,
         y: -1 * state.stage.y + objectOffset,
-        rotation: 0,
-        zIndex: 0
+        rotation: 0
       };
       clearInterval(offsetTimer);
       objectOffset += 50;

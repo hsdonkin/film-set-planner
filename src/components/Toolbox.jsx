@@ -65,7 +65,6 @@ class Toolbox extends React.Component {
       toggleGrid,
       startDownload,
       finishDownload,
-      saveNewDiagram,
       undo,
       redo
     } = this.props;
@@ -110,9 +109,13 @@ class Toolbox extends React.Component {
         <div className="diagram-button-wrapper">
           <button
             onClick={() => {
+              // let the app know it's downloading
               startDownload();
               const canvases = document.getElementsByTagName("canvas");
               const ctx = canvases[0].getContext("2d");
+
+              // create a white rectangle backdrop that is the exact height / width of the canvas layers
+              // condense down all canvases to a single canvas
               ctx.fillStyle = "white";
               ctx.fillRect(0, 0, canvases[0].width, canvases[0].height);
               ctx.drawImage(canvases[1], 0, 0);
@@ -121,10 +124,7 @@ class Toolbox extends React.Component {
               const dataUri = canvases[0].toDataURL("image/jpg");
 
               FileSaver.saveAs(dataUri, `${v4()}.jpg`);
-              // let link = document.createElement("a");
-              // link.download = "diagram.png";
-              // link.href = dataUri;
-              // link.click();
+              // change state back
               finishDownload();
             }}
           >

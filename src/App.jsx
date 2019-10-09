@@ -10,9 +10,8 @@ import {
 
 // components
 import Diagram from "./components/Diagram";
-import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
-// toolbar
+// toolbar is really just a header
 import Toolbar from "./components/Toolbar";
 // toolbox
 import Toolbox from "./components/Toolbox";

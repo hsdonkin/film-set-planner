@@ -12,8 +12,9 @@ import {
   toggleObjectLocked
 } from "./../actions";
 
-// all these requires have to be done here
-// ha ha ha is this legal who knows
+// all these requires have to be done here to work with webpack
+// a better solution would be to host these somewhere else, but....
+
 const PlusGrnRoll = require("./../assets/+Grn Roll.png");
 const MinusGrnRoll = require("./../assets/-Grn Roll.png");
 const OneMarkerBlack = require("./../assets/1 Marker Black.png");
@@ -447,10 +448,7 @@ class ObjectImage extends React.Component {
   };
 
   render() {
-    let rotationAngles;
-    let zIndex = 0;
     const {
-      addObjectToDiagram,
       updateXYPosition,
       toggleObjectSelected,
       deselectAllObjects,
@@ -458,6 +456,8 @@ class ObjectImage extends React.Component {
       removeObjectFromDiagram,
       toggleObjectLocked
     } = this.props;
+
+    // image attributes
     let xPos = this.props.x;
     let yPos = this.props.y;
     let rotation = this.props.rotation;
@@ -471,6 +471,8 @@ class ObjectImage extends React.Component {
       };
     }
     // eval so that we can dynamically select images
+    // this should be retooled to be dynamic selection of urls
+    // don't try this at home kids
     this.loadedImage.src = eval(this.props.imgName);
 
     if (this.state.selected === true) {
