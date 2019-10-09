@@ -47,6 +47,7 @@ class Diagram extends React.Component {
   }
 
   componentDidMount = () => {
+    console.log("component mounting");
     let gridImage = new Image();
     gridImage.onload = () => {
       this.setState({
@@ -80,12 +81,13 @@ class Diagram extends React.Component {
     } else if (
       window.innerWidth >= 1450 &&
       window.innerWidth < 1650 &&
-      this.state.diagramWidth != window.innerWidth * 0.6
+      this.state.diagramWidth != window.innerWidth * 0.57
     ) {
+      console.log("here");
       this.setState({
         ...this.state,
         diagramHeight: window.innerHeight * 0.6,
-        diagramWidth: window.innerWidth * 0.6
+        diagramWidth: window.innerWidth * 0.57
       });
     } else {
       this.setState({

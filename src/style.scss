@@ -123,12 +123,11 @@ button:focus {
 
 .saved-diagrams {
   overflow: auto;
-  float: right;
   vertical-align: top;
   display: inline-block;
   width: 200px;
   height: 85vh;
-  margin-left: 1rem;
+  margin-left: 2rem;
   margin-right: 1rem;
   top: 0;
 }
@@ -171,6 +170,10 @@ button:focus {
 
 .saved-diagrams button.delete:focus {
   outline: none;
+}
+
+.saved-diagrams hr {
+  border: 1px solid whitesmoke;
 }
 
 .toolbox {
@@ -236,8 +239,17 @@ button:focus {
   font-weight: normal;
 }
 
+.diagram-name-description hr {
+  border: 1px solid whitesmoke;
+  display: block;
+  width: 80%;
+  margin-top: 1rem;
+}
+
 .diagram-name-description button {
   float: right;
+  clear: right;
+  right: 0;
   background-color: green;
   color: white;
   border: none;

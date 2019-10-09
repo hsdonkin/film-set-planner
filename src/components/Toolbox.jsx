@@ -101,6 +101,7 @@ class Toolbox extends React.Component {
               value={this.state.diagramDesc || ""}
               autoComplete="off"
             />
+
             <button id="save-button" type="submit">
               Save
             </button>
