@@ -172,6 +172,10 @@ button:focus {
   outline: none;
 }
 
+.saved-diagrams hr {
+  border: 1px solid whitesmoke;
+}
+
 .toolbox {
   display: flex;
   justify-content: space-evenly;
@@ -235,8 +239,17 @@ button:focus {
   font-weight: normal;
 }
 
+.diagram-name-description hr {
+  border: 1px solid whitesmoke;
+  display: block;
+  width: 80%;
+  margin-top: 1rem;
+}
+
 .diagram-name-description button {
   float: right;
+  clear: right;
+  right: 0;
   background-color: green;
   color: white;
   border: none;
