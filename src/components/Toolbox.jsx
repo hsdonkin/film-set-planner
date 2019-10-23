@@ -1,29 +1,29 @@
-import React from "react";
-import $ from "jquery";
+import React from 'react';
+import $ from 'jquery';
 
 // v4
-import { v4 } from "uuid";
+import { v4 } from 'uuid';
 
 // redux
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import {
   resetStageXYPosition,
   toggleGrid,
   startDownload,
   finishDownload,
   saveNewDiagram
-} from "./../actions";
-import { ActionCreators } from "redux-undo";
+} from './../actions';
+import { ActionCreators } from 'redux-undo';
 
 // file download
-const FileSaver = require("file-saver");
+const FileSaver = require('file-saver');
 
 class Toolbox extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       diagramName: this.props.diagram.name,
-      diagramDesc: ""
+      diagramDesc: ''
     };
   }
 
@@ -48,7 +48,7 @@ class Toolbox extends React.Component {
   };
 
   handleChange = event => {
-    this.setState({ [event.target["name"]]: event.target.value });
+    this.setState({ [event.target['name']]: event.target.value });
   };
 
   handleFormSubmit = event => {
@@ -77,17 +77,17 @@ class Toolbox extends React.Component {
               event.preventDefault();
               this.handleFormSubmit(event);
             }}
-            id={"diagram-name-form"}
+            id={'diagram-name-form'}
           >
             <input
               id="save-input"
-              name={"diagramName"}
+              name={'diagramName'}
               type="text"
               onChange={event => {
                 this.handleChange(event);
               }}
-              placeholder={"Diagram Name"}
-              value={this.state.diagramName || ""}
+              placeholder={'Diagram Name'}
+              value={this.state.diagramName || ''}
               autoComplete="off"
               required
             />
@@ -97,7 +97,7 @@ class Toolbox extends React.Component {
                 this.handleChange(event);
               }}
               placeholder="Write a description of this project here. This is a great place for notes for your key grip and gaffer, or notes for the production team."
-              value={this.state.diagramDesc || ""}
+              value={this.state.diagramDesc || ''}
               autoComplete="off"
             />
 
@@ -111,17 +111,17 @@ class Toolbox extends React.Component {
             onClick={() => {
               // let the app know it's downloading
               startDownload();
-              const canvases = document.getElementsByTagName("canvas");
-              const ctx = canvases[0].getContext("2d");
+              const canvases = document.getElementsByTagName('canvas');
+              const ctx = canvases[0].getContext('2d');
 
               // create a white rectangle backdrop that is the exact height / width of the canvas layers
               // condense down all canvases to a single canvas
-              ctx.fillStyle = "white";
+              ctx.fillStyle = 'white';
               ctx.fillRect(0, 0, canvases[0].width, canvases[0].height);
               ctx.drawImage(canvases[1], 0, 0);
               ctx.drawImage(canvases[2], 0, 0);
               ctx.drawImage(canvases[3], 0, 0);
-              const dataUri = canvases[0].toDataURL("image/jpg");
+              const dataUri = canvases[0].toDataURL('image/jpg');
 
               FileSaver.saveAs(dataUri, `${v4()}.jpg`);
               // change state back

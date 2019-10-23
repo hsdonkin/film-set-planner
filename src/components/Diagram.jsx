@@ -1,15 +1,15 @@
-import React from "react";
+import React from 'react';
 // redux
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import {
   deselectAllObjects,
   updateStageXYPosition,
   resetStageXYPosition,
   updateStageScale
-} from "./../actions";
-import { ActionCreators } from "redux-undo";
+} from './../actions';
+import { ActionCreators } from 'redux-undo';
 // v4
-import { v4 } from "uuid";
+import { v4 } from 'uuid';
 // konva
 import {
   Stage,
@@ -18,15 +18,15 @@ import {
   Transformer,
   Image as KonvaImage,
   Rect
-} from "react-konva";
-import { useStrictMode } from "react-konva";
+} from 'react-konva';
+import { useStrictMode } from 'react-konva';
 useStrictMode(true);
 
 // graph pattern
-const graphPattern = require("./../assets/four-graph-pattern.png");
+const graphPattern = require('./../assets/four-graph-pattern.png');
 
 // dynamic image layer
-import ObjectImage from "./ObjectImage";
+import ObjectImage from './ObjectImage';
 
 class Diagram extends React.Component {
   constructor(props) {
@@ -46,7 +46,7 @@ class Diagram extends React.Component {
   }
 
   componentDidMount = () => {
-    console.log("component mounting");
+    console.log('component mounting');
 
     // new Image is async, so when it's loaded, change state to loaded:true
     let gridImage = new Image();
@@ -85,7 +85,7 @@ class Diagram extends React.Component {
       window.innerWidth < 1650 &&
       this.state.diagramWidth != window.innerWidth * 0.57
     ) {
-      console.log("here");
+      console.log('here');
       this.setState({
         ...this.state,
         diagramHeight: window.innerHeight * 0.6,
@@ -243,7 +243,7 @@ class Diagram extends React.Component {
           height={8000}
           width={8000}
           fillPatternImage={this.state.gridImage}
-          fillPatternRepeat={"repeat"}
+          fillPatternRepeat={'repeat'}
           fillPatternOffsetX={250}
           fillPatternOffsetY={100}
           opacity={0.3}
@@ -256,6 +256,28 @@ class Diagram extends React.Component {
 
     return (
       <React.Fragment>
+        <button
+          onClick={() => {
+            this.setState({
+              ...this.state,
+              scale: this.state.scale + this.state.scale * 0.25
+            });
+            updateStageScale(this.state.scale);
+          }}
+        >
+          +
+        </button>
+        <button
+          onClick={() => {
+            this.setState({
+              ...this.state,
+              scale: this.state.scale - this.state.scale * 0.25
+            });
+            updateStageScale(this.state.scale);
+          }}
+        >
+          -
+        </button>
         <Stage
           ref={this.stageRef}
           x={stage.x}
@@ -263,9 +285,9 @@ class Diagram extends React.Component {
           scaleX={this.state.scale}
           scaleY={this.state.scale}
           style={{
-            border: "1px whitesmoke solid",
-            display: "block",
-            margin: "auto"
+            border: '1px whitesmoke solid',
+            display: 'block',
+            margin: 'auto'
           }}
           width={this.state.diagramWidth}
           height={this.state.diagramHeight}
@@ -323,7 +345,7 @@ class Diagram extends React.Component {
             }, 1000);
           }}
         >
-          <Layer id={"baseLayer"} />
+          <Layer id={'baseLayer'} />
           <Layer>{gridRectangle}</Layer>
           <Layer key={v4()}>{lockedObjectImagesList}</Layer>
           <Layer key={v4()} draggable>
